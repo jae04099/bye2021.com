@@ -1,17 +1,13 @@
 import styled from "styled-components";
+import Main from './pages/Main'
+import './App.css'
 
 function App() {
   return (
     <div className="App">
-      <Sample>
-        hhhh
-      </Sample>
+      <Main />
     </div>
   );
 }
 
 export default App;
-
-const Sample = styled.a`
-font-size: 120px;
-`
