@@ -1,4 +1,5 @@
 import styled from "styled-components";
+
 function App() {
   return (
     <div className="App">
@@ -11,6 +12,6 @@ function App() {
 
 export default App;
 
-const Sample = styled.div`
-color: blue;
+const Sample = styled.a`
+font-size: 120px;
 `
