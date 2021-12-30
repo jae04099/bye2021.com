@@ -13,6 +13,7 @@ export default function Question() {
 
     if ([...checklist].filter((e) => e).length > 5) {
       alert("키워드는 5개까지만 입력해주세요.")
+      // 다섯번째 취소시 에러
     } else setChecklist([...checklist])
   }
   return (
