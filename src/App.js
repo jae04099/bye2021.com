@@ -1,13 +1,13 @@
-import styled from "styled-components";
-import Main from './pages/Main'
-import './App.css'
+import styled from "styled-components"
+import Question from "./pages/Question"
+import "./App.css"
 
 function App() {
   return (
     <div className="App">
-      <Main />
+      <Question />
     </div>
-  );
+  )
 }
 
-export default App;
+export default App

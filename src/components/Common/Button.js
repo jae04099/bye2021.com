@@ -1,14 +1,13 @@
-import React from 'react'
-import styled from 'styled-components'
+import React from "react"
+import styled from "styled-components"
 
-export default function Button() {
-    return (
-        <Button>
-            
-        </Button>
-    )
+export default function Button({ handleClick, children }) {
+  return <Btn onClick={handleClick}>{children}</Btn>
 }
 
-const Button = styled.button`
-
+const Btn = styled.button`
+  width: 80;
+  height: 48px;
+  background: #ced0f2;
+  border-radius: 5px;
 `
