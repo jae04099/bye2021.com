@@ -13,3 +13,12 @@ export const QuestionData = [
   "슬픔 😢",
   "장소 🗺",
 ]
+
+export const ColorChip = [
+  "#392AEC",
+  "#E8E7F0",
+  "#CAC7EF",
+  "#9091ED",
+  "#6D79EC",
+  "#fff"
+]
