@@ -1,9 +1,7 @@
 import styled from "styled-components"
 import Question from "./pages/Question"
-
 import FormName from "./components/Main/FormName"
 import Main from "./pages/Main"
-
 import "./App.css"
 
 function App() {
@@ -13,8 +11,6 @@ function App() {
       {/* <FormName /> */}
 
       <Main />
-
-      <Question />
     </div>
   )
 }
