@@ -14,7 +14,7 @@ import Result from "./pages/Result";
 
 ReactDOM.render(
   <BrowserRouter>
-  <Routes>
+    <Routes>
       <Route path="/" element={<App />} />
       <Route path="main" element={<Main />} />
       <Route path="answer" element={<Answer />} />
