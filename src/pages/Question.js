@@ -1,4 +1,5 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
+import useStore from "../store"
 import { QuestionData } from "../data"
 import Checkbox from "../components/Question/Checkbox"
 import styled from "styled-components"
@@ -8,6 +9,7 @@ import Header from "../components/Common/Header"
 
 export default function Question() {
   let dataLength = QuestionData.length
+  const {name} = useStore();
   const [checklist, setChecklist] = useState(new Array(dataLength).fill(false))
 
   const handleCheck = (idx) => {
@@ -25,7 +27,7 @@ export default function Question() {
       {/* user 훅스 사용? */}
       <Header></Header>
       <Ask>
-        <Strong>김민주</Strong>님의 2021을 대표하는
+        <Strong>{name}</Strong>님의 2021을 대표하는
         <br /> 키워드를 5개 선택해주세요
       </Ask>
       <QuestionDataContainer>

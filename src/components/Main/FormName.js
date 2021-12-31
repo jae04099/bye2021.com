@@ -1,26 +1,20 @@
-import React, { useState } from "react"
-import Button from "../Common/Button"
-import styled from "styled-components"
+
+import React from 'react'
+import useStore from '../../store';
+import styled from 'styled-components'
 
 export default function FormName() {
-  const [name, setName] = useState("")
-  const handleName = (props) => {
-    setName(props)
-  }
-  return (
-    <>
-      <NameForm>
-        <label>이름을 입력해주세요</label>
-        <input
-          value={name}
-          onChange={() => setName()}
-          type="input"
-          placeholder="김이름"
-        ></input>
-      </NameForm>
-      <Button handleClick={() => handleName(name)} children={"2021 정리하기"} />
-    </>
-  )
+    const {name, setName} = useStore();
+    console.log(name)
+    return (
+        <Container>
+            <form onClick={e => e.preventDefault(e)}>
+                <label>이름을 입력해주세요</label>
+                <input value={name} onChange={e => setName(e.target.value)} placeholder='김이름'></input>
+            </form>
+        </Container>
+    )
+
 }
 
 const NameForm = styled.form`

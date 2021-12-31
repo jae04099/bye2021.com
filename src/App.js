@@ -1,6 +1,7 @@
 import styled from "styled-components"
 import Question from "./pages/Question"
 import FormName from "./components/Main/FormName"
+
 import Result from "./pages/Result"
 import Main from "./pages/Main"
 import Header from "./components/Common/Header"
