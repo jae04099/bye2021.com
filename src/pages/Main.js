@@ -1,24 +1,12 @@
-import React from "react"
-import styled from "styled-components"
-import FormName from "../components/Main/FormName"
-import Container from "../components/Common/Container"
+import React from 'react'
+import FormName from '../components/Main/FormName'
+import Button from '../components/Common/Button'
 
 export default function Main() {
-  return (
-    <Container>
-      <Title>
-        안녕!<em>2021</em>✋
-      </Title>
-      <FormName />
-    </Container>
-  )
+    return (
+        <>
+            <FormName />
+            <Button children={'2021 기록하기'}/>
+        </>
+    )
 }
-
-const Title = styled.h1`
-  font-size: 36px;
-  text-align: center;
-  em {
-    color: #9091ed;
-    font-style: normal;
-  }
-`
