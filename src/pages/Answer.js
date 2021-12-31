@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react"
 import styled from "styled-components"
+import { Link } from "react-router-dom"
 import Button from "../components/Common/Button"
 import Container from "../components/Common/Container"
 import Header from "../components/Common/Header"
@@ -56,7 +57,7 @@ export default function Answer() {
     <Container>
       <Header />
       {mock_u.map((uq, idx) => {
-        if (idx == 0) return <h2>Goodbye 2021</h2>
+        if (idx == 0) return <h2 key={uq}>Goodbye 2021</h2>
         else {
           return (
             <p>
@@ -73,7 +74,7 @@ export default function Answer() {
           )
         }
       })}
-      <Button width={100}>2021 정리하기</Button>
+      <Button toLink={'/result'} children={'2021 정리하기'}/>
     </Container>
   )
 }
