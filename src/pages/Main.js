@@ -5,18 +5,14 @@ import Container from "../components/Common/Container"
 
 export default function Main() {
   return (
-    <MainContainer>
+    <Container>
       <Title>
         안녕!<em>2021</em>✋
       </Title>
       <FormName />
-    </MainContainer>
+    </Container>
   )
 }
-
-const MainContainer = styled(Container)`
-  justify-content: space-evenly;
-`
 
 const Title = styled.h1`
   font-size: 36px;

@@ -53,6 +53,8 @@ const Strong = styled.strong`
   color: #6b8df2;
 `
 const QuestionDataContainer = styled.article`
-  width: 100%;
-  padding-left: 60px;
+  width: 80%;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 3vh;
 `
