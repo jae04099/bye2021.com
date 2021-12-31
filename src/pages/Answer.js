@@ -18,8 +18,8 @@ export default function Answer() {
   }, [])
 
   const handleInput = (e, idx) => {
-    if (e.target.value.length > 30) {
-      alert("30자 내로 입력해주세요.")
+    if (e.target.value.length > 150) {
+      alert("150자 내로 입력해주세요.")
     } else {
       selAnswer[idx] = e.target.value
       setSelAnswer([...selAnswer])
@@ -42,9 +42,9 @@ export default function Answer() {
             </h3>
             <AnswerBox
               value={selAnswer[idx]}
-              placeholder="30자 이내로 입력해주세요."
+              placeholder="150자 이내로 입력해주세요."
               onChange={(e) => handleInput(e, idx)}
-              rows={2}
+              rows={5}
               cols={30}
             ></AnswerBox>
           </p>
