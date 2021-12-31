@@ -10,12 +10,16 @@ export default function Question() {
   const [checklist, setChecklist] = useState(new Array(dataLength).fill(false))
 
   const handleCheck = (idx) => {
-    checklist[idx] = !checklist[idx]
-    if ([...checklist].filter((e) => e).length > 5) {
+    if (!checklist[idx] && [...checklist].filter((e) => e).length >= 5) {
       alert("키워드는 5개까지만 입력해주세요.")
       // 다섯번째 취소시 에러
-    } else setChecklist([...checklist])
+    } else {
+      checklist[idx] = !checklist[idx]
+      setChecklist([...checklist])
+    }
   }
+
+  const 
   return (
     <Container>
       {/* user 훅스 사용? */}

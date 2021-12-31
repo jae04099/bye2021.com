@@ -5,15 +5,15 @@ import Result from "./pages/Result"
 import Main from "./pages/Main"
 import Header from "./components/Common/Header"
 import "./App.css"
+import Answer from "./pages/Answer"
 
 function App() {
   return (
-    <div className="App">
-      <Header />
-      {/* <Question /> */}
-      {/* <FormName /> */}
-      <Result />
-    </div>
+    <>
+      <Main />
+      <Question />
+      <Answer />
+    </>
   )
 }
 
