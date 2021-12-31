@@ -10,7 +10,6 @@ export default function Button({ toLink, children, onClick = undefined }) {
   )
 }
 
-// 여기 위에 링크 to를 변수로 바꾸고 싶은데 그게 어렵네유
 const Container = styled.div`
   width: 100vw;
   display: flex;
@@ -23,8 +22,10 @@ const StyledLink = styled(Link)`
   width: 80%;
   height: 48px;
   font-size: 18px;
+  color: #222;
   background: #ced0f2;
   border-radius: 5px;
   text-align: center;
   line-height: 50px;
+  margin: 15px;
 `
