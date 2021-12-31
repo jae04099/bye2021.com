@@ -12,8 +12,8 @@ function App() {
   return (
     <>
       {/* <Main /> */}
-      <Question />
-      <Answer />
+      {/* <Question />
+      <Answer /> */}
     </>
   )
 }
