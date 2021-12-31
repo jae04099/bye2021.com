@@ -1,13 +1,15 @@
-import React, {useState} from 'react'
+import React from 'react'
+import useStore from '../../store';
 import styled from 'styled-components'
 
 export default function FormName() {
-    const [name, setName] = useState('');
+    const {name, setName} = useStore();
+    console.log(name)
     return (
         <Container>
-            <form>
+            <form onClick={e => e.preventDefault(e)}>
                 <label>이름을 입력해주세요</label>
-                <input value={name} onChange={() => setName()} type="input" placeholder='김이름'></input>
+                <input value={name} onChange={e => setName(e.target.value)} placeholder='김이름'></input>
             </form>
         </Container>
     )
