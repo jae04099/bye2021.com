@@ -17,7 +17,7 @@ export default function App() {
 }
 
 const Header = styled.h1`
-  font-size: 36px;
+  font-size: 48px;
   margin-top: 30px;
   z-index: 1;
   color: #222;
