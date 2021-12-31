@@ -4,6 +4,7 @@ import { Link } from "react-router-dom"
 import Button from "../components/Common/Button"
 import Container from "../components/Common/Container"
 import Header from "../components/Common/Header"
+import useStore from "../store"
 
 const mock_q = ["영화 🎬", "음악 🎧", "물건 🛍", "사건 📆", "책 📚"]
 const mock_u = [
@@ -36,6 +37,7 @@ const mock_u = [
 ]
 
 export default function Answer() {
+  const { name } = useStore()
   const [mockdata, setMockdata] = useState(mock_u)
 
   useEffect(() => {
@@ -57,12 +59,12 @@ export default function Answer() {
     <Container>
       <Header />
       {mock_u.map((uq, idx) => {
-        if (idx == 0) return <h2 key={uq}>Goodbye 2021</h2>
+        if (idx === 0) return <h2>Goodbye 2021</h2>
         else {
           return (
             <p>
               <h3>
-                {mock_u[0]}의 {uq.question}
+                {name}의 {uq.question}
               </h3>
               <AnswerBox
                 value={uq.answer}
@@ -74,7 +76,7 @@ export default function Answer() {
           )
         }
       })}
-      <Button toLink={'/result'} children={'2021 정리하기'}/>
+      <Button toLink={"/result"} children={"2021 정리하기"} />
     </Container>
   )
 }
