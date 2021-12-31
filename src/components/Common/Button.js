@@ -10,7 +10,7 @@ export default function Button({ handleClick, children }) {
 }
 
 const Container = styled.div`
-  width: 100%;
+  width: 100vw;
   display: flex;
   justify-content: center;
   margin-top: 30px;

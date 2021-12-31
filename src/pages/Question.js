@@ -3,6 +3,7 @@ import { QuestionData } from "../data"
 import Checkbox from "../components/Question/Checkbox"
 import styled from "styled-components"
 import Button from "../components/Common/Button"
+import Container from "../components/Common/Container"
 
 export default function Question() {
   let dataLength = QuestionData.length
@@ -16,7 +17,7 @@ export default function Question() {
     } else setChecklist([...checklist])
   }
   return (
-    <QuestionContainer>
+    <Container>
       {/* user 훅스 사용? */}
       <Header>
         <Strong>김민주</Strong>님의 2021을 대표하는
@@ -37,16 +38,9 @@ export default function Question() {
         })}
       </QuestionDataContainer>
       <Button>2021 정리하기</Button>
-    </QuestionContainer>
+    </Container>
   )
 }
-
-const QuestionContainer = styled.main`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  background: #ebebf2;
-`
 
 const Header = styled.h1`
   margin: 20px;
