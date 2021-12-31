@@ -1,40 +1,59 @@
 import create from "zustand"
+import produce from "immer"
 
 const useStore = create((set) => ({
   name: "",
-  question: [
-    {
-      no: 0,
-      question: "",
-      answer: "",
-    },
-    {
-      no: 1,
-      question: "",
-      answer: "",
-    },
-    {
-      no: 2,
-      question: "",
-      answer: "",
-    },
-    {
-      no: 3,
-      question: "",
-      answer: "",
-    },
-    {
-      no: 4,
-      question: "",
-      answer: "",
-    },
-  ],
   setName: (state) =>
     set(() => ({
       ...useStore,
       name: state,
     })),
-  setQuest: (idx, state) => (this.question[idx].question = state),
 }))
 
-export default useStore
+const useQuest = create((set) => ({
+  qna: [
+    {
+      id: 0,
+      question: "",
+      answer: "",
+    },
+    {
+      id: 1,
+      question: "",
+      answer: "",
+    },
+    {
+      id: 2,
+      question: "",
+      answer: "",
+    },
+    {
+      id: 3,
+      question: "",
+      answer: "",
+    },
+    {
+      id: 4,
+      question: "",
+      answer: "",
+    },
+  ],
+
+  editQuestion: (q) => {
+    set(
+      produce((draft) => {
+        const qu = draft.qna.find((el) => el.id === q.id)
+        qu.question = q.question
+      })
+    )
+  },
+  editAnswer: (a) => {
+    set(
+      produce((draft) => {
+        const an = draft.qna.find((el) => el.id === a.id)
+        an.answer = a.answer
+      })
+    )
+  },
+}))
+export { useStore, useQuest }

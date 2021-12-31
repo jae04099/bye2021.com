@@ -5,7 +5,9 @@ import styled from "styled-components"
 export default function Button({ toLink, children, onClick = undefined }) {
   return (
     <Container>
-      <StyledLink to={toLink}>{children}</StyledLink>
+      <StyledLink onClick={onClick} to={toLink}>
+        {children}
+      </StyledLink>
     </Container>
   )
 }
