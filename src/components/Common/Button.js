@@ -27,4 +27,5 @@ const StyledLink = styled(Link)`
   border-radius: 5px;
   text-align: center;
   line-height: 50px;
+  margin: 15px;
 `
