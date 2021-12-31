@@ -16,4 +16,10 @@ display: flex;
 justify-content: center;
 `
 
-const Btn = styled.button``
+const Btn = styled.button`
+  width: 80%;
+  height: 48px;
+  font-size: 18px;
+  background: #ced0f2;
+  border-radius: 5px;
+`
