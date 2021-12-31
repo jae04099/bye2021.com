@@ -4,6 +4,7 @@ import Checkbox from "../components/Question/Checkbox"
 import styled from "styled-components"
 import Button from "../components/Common/Button"
 import Container from "../components/Common/Container"
+import Header from "../components/Common/Header"
 
 export default function Question() {
   let dataLength = QuestionData.length
@@ -19,14 +20,14 @@ export default function Question() {
     }
   }
 
-  const 
   return (
     <Container>
       {/* user 훅스 사용? */}
-      <Header>
+      <Header></Header>
+      <Ask>
         <Strong>김민주</Strong>님의 2021을 대표하는
         <br /> 키워드를 5개 선택해주세요
-      </Header>
+      </Ask>
       <QuestionDataContainer>
         {QuestionData.map((q, idx) => {
           return (
@@ -41,13 +42,13 @@ export default function Question() {
           )
         })}
       </QuestionDataContainer>
-      <Button>2021 정리하기</Button>
+      <Button width={300}>2021 정리하기</Button>
     </Container>
   )
 }
 
-const Header = styled.h1`
-  margin: 20px;
+const Ask = styled.h1`
+  margin-top: 20px;
   line-height: 30px;
   font-size: 24px;
 `

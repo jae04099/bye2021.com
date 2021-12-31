@@ -10,7 +10,7 @@ import Answer from "./pages/Answer"
 function App() {
   return (
     <>
-      <Main />
+      {/* <Main /> */}
       <Question />
       <Answer />
     </>
