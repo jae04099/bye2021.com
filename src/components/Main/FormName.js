@@ -11,7 +11,7 @@ export default function FormName() {
         <input
           value={name}
           onChange={(e) => setName(e.target.value)}
-          placeholder="김이름"
+          placeholder="이름"
         ></input>
       </NameForm>
     </>

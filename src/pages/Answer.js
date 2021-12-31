@@ -42,6 +42,7 @@ export default function Answer() {
             </h3>
             <AnswerBox
               value={selAnswer[idx]}
+              placeholder="30자 이내로 입력해주세요."
               onChange={(e) => handleInput(e, idx)}
               rows={2}
               cols={30}
@@ -61,6 +62,7 @@ export default function Answer() {
 const AnswerBox = styled.textarea`
   border: none;
   resize: none;
+  margin-top: 15px;
   &:focus {
     outline: none;
   }
