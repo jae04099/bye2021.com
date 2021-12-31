@@ -1,8 +1,8 @@
 import React, { useState } from "react"
 import { QuestionData } from "../data"
 import Checkbox from "../components/Question/Checkbox"
-import RemindBtn from "../components/Question/RemindBtn"
 import styled from "styled-components"
+import Button from "../components/Common/Button"
 
 export default function Question() {
   let dataLength = QuestionData.length
@@ -36,13 +36,12 @@ export default function Question() {
           )
         })}
       </QuestionDataContainer>
-      <RemindBtn>2021 정리하기</RemindBtn>
+      <Button>2021 정리하기</Button>
     </QuestionContainer>
   )
 }
 
 const QuestionContainer = styled.main`
-  padding: 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -61,5 +60,5 @@ const Strong = styled.strong`
 `
 const QuestionDataContainer = styled.article`
   width: 100%;
-  margin-left: 60px;
+  padding-left: 60px;
 `
