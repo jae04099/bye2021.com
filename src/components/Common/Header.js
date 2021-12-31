@@ -13,7 +13,7 @@ const Title = styled.h1`
   position: absolute;
   top: 15px;
   left: 10px;
-  color: #222;
+  color: #444;
   em {
     font-style: normal;
   }

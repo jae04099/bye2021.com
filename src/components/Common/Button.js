@@ -10,7 +10,7 @@ export default function Button({ handleClick, children, width }) {
 }
 
 const Container = styled.div`
-  width: ${(props) => props.width};
+  width: ${(props) => props.width}vw;
   display: flex;
   justify-content: center;
 `
