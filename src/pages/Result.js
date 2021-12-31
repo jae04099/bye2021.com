@@ -1,7 +1,7 @@
 import React from 'react'
 import Button from '../components/Common/Button'
 import styled from 'styled-components'
-import ResultFooter from '../components/Result/ResultFooter'
+// import ResultFooter from '../components/Result/ResultFooter'
 import Tile from '../components/Result/Tile'
 import { ColorChip } from '../data'
 
@@ -17,7 +17,7 @@ export default function Result() {
             <Tile color={ColorChip[5]}/>
         </Container>
         <Button toLink={'/main'} children={'다시하기'}/>
-        <ResultFooter />
+        {/* <ResultFooter /> */}
         </>
     )
 }
