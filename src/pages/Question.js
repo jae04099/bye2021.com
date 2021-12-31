@@ -30,7 +30,6 @@ export default function Question() {
 
   return (
     <Container>
-      {/* user 훅스 사용? */}
       <Header></Header>
       <Ask>
         <Strong>{name}</Strong>님의 2021을 대표하는
