@@ -7,7 +7,6 @@ import Header from "../components/Common/Header"
 
 const mock_q = ["영화 🎬", "음악 🎧", "물건 🛍", "사건 📆", "책 📚"]
 const mock_u = [
-  "userName",
   {
     no: 0,
     question: "",
@@ -57,7 +56,7 @@ export default function Answer() {
     <Container>
       <Header />
       {mock_u.map((uq, idx) => {
-        if (idx == 0) return <h2 key={uq}>Goodbye 2021</h2>
+        if (idx === 0) return <h2>Goodbye 2021</h2>
         else {
           return (
             <p>
@@ -74,7 +73,7 @@ export default function Answer() {
           )
         }
       })}
-      <Button toLink={'/result'} children={'2021 정리하기'}/>
+      <Button toLink={"/result"} children={"2021 정리하기"} />
     </Container>
   )
 }

@@ -10,13 +10,12 @@ import Header from "../components/Common/Header"
 
 export default function Question() {
   let dataLength = QuestionData.length
-  const { name } = useStore()
+  const { name, question, setQuest } = useStore()
   const [checklist, setChecklist] = useState(new Array(dataLength).fill(false))
 
   const handleCheck = (idx) => {
     if (!checklist[idx] && [...checklist].filter((e) => e).length >= 5) {
       alert("키워드는 5개까지만 입력해주세요.")
-      // 다섯번째 취소시 에러
     } else {
       checklist[idx] = !checklist[idx]
       setChecklist([...checklist])
@@ -45,7 +44,7 @@ export default function Question() {
           )
         })}
       </QuestionDataContainer>
-      <Button toLink={'/answer'} children={'2021 기록하기'}/>
+      <Button toLink={"/answer"} children={"2021 기록하기"} />
     </Container>
   )
 }

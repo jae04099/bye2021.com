@@ -5,7 +5,6 @@ import Container from "../Common/Container"
 
 export default function FormName() {
   const { name, setName } = useStore()
-  console.log(name)
   return (
     <Container>
       <NameForm onClick={(e) => e.preventDefault(e)}>
