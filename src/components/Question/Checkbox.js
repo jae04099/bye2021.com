@@ -2,11 +2,9 @@ import styled from "styled-components"
 
 const Checkbox = ({ onClick, num, children, checked = false }) => {
   return (
-    <CheckContainer checked={checked}>
+    <CheckContainer onClick={onClick} checked={checked}>
       <input className="sr-only" id={num} name="questions" type="checkbox" />
-      <Check onClick={onClick} htmlFor={num}>
-        {children}
-      </Check>
+      <Check htmlFor={num}>{children}</Check>
     </CheckContainer>
   )
 }
