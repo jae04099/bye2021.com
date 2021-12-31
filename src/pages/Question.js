@@ -11,6 +11,7 @@ export default function Question() {
   let dataLength = QuestionData.length
   const { name } = useStore()
   const { editQuestion } = useQuest()
+  const [isActive, setIsActive] = useState(false)
   const [checklist, setChecklist] = useState(new Array(dataLength).fill(false))
 
   const handleCheck = (idx) => {
@@ -23,9 +24,14 @@ export default function Question() {
   }
 
   const handleClick = () => {
-    let selected = []
-    checklist.forEach((e, idx) => e && selected.push(QuestionData[idx]))
-    selected.forEach((e, idx) => editQuestion({ id: idx, question: e }))
+    if ([...checklist].filter((e) => e).length !== 5) {
+      alert("키워드를 5개 선택해주세요.")
+    } else {
+      setIsActive(true)
+      let selected = []
+      checklist.forEach((e, idx) => e && selected.push(QuestionData[idx]))
+      selected.forEach((e, idx) => editQuestion({ id: idx, question: e }))
+    }
   }
 
   return (
@@ -50,7 +56,7 @@ export default function Question() {
         })}
       </QuestionDataContainer>
       <Button
-        toLink={"/answer"}
+        toLink={isActive ? "/answer" : "#"}
         onClick={handleClick}
         children={"2021 기록하기"}
       />
