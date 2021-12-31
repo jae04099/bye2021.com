@@ -16,7 +16,7 @@ export default function Result() {
             <Tile color={ColorChip[4]}/>
             <Tile color={ColorChip[5]}/>
         </Container>
-        <Button toLink={'/main'} children={'다시하기'}/>
+        <Button toLink={'/'} children={'다시하기'}/>
         {/* <ResultFooter /> */}
         </>
     )
