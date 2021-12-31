@@ -1,21 +1,28 @@
+import React from "react"
 import styled from "styled-components"
-import Question from "./pages/Question"
 import FormName from "./components/Main/FormName"
+import Button from "./components/Common/Button"
+import Container from "./components/Common/Container"
 
-import Result from "./pages/Result"
-import Main from "./pages/Main"
-import Header from "./components/Common/Header"
-import "./App.css"
-import Answer from "./pages/Answer"
-
-function App() {
+export default function App() {
   return (
-    <>
-      {/* <Main /> */}
-      {/* <Question />
-      <Answer /> */}
-    </>
+    <Container>
+      <Header>
+        안녕!<em>2021</em>✋
+      </Header>
+      <FormName />
+      <Button toLink={"/question"} children={"2021 기록하기"} />
+    </Container>
   )
 }
 
-export default App
+const Header = styled.h1`
+  font-size: 36px;
+  margin-top: 30px;
+  z-index: 1;
+  color: #222;
+  em {
+    font-style: normal;
+    color: #6d79ec;
+  }
+`

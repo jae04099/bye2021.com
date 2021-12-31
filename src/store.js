@@ -1,4 +1,3 @@
-import { useState } from "react/cjs/react.development"
 import create from "zustand"
 
 const useStore = create((set) => ({
@@ -32,7 +31,7 @@ const useStore = create((set) => ({
   ],
   setName: (state) =>
     set(() => ({
-      ...useState,
+      ...useStore,
       name: state,
     })),
   setQuest: (idx, state) => (this.question[idx].question = state),

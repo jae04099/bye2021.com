@@ -3,8 +3,7 @@ import styled from "styled-components"
 const Checkbox = ({ onClick, num, children, checked = false }) => {
   return (
     <CheckContainer onClick={onClick} checked={checked}>
-      <input className="sr-only" id={num} name="questions" type="checkbox" />
-      <Check htmlFor={num}>{children}</Check>
+      <Check>{children}</Check>
     </CheckContainer>
   )
 }
@@ -23,6 +22,6 @@ const CheckContainer = styled.article`
   border-radius: 10px;
 `
 
-const Check = styled.label`
+const Check = styled.span`
   display: inline;
 `
