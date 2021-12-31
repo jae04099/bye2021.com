@@ -12,7 +12,6 @@ const Checkbox = ({ onClick, num, children, checked = false }) => {
 }
 
 export default Checkbox
-
 const Check = styled.label`
   position: relative;
   &::before {
