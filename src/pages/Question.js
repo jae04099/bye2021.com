@@ -10,7 +10,7 @@ import Header from "../components/Common/Header"
 
 export default function Question() {
   let dataLength = QuestionData.length
-  const {name} = useStore();
+  const { name } = useStore()
   const [checklist, setChecklist] = useState(new Array(dataLength).fill(false))
 
   const handleCheck = (idx) => {
