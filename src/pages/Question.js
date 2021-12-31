@@ -1,8 +1,9 @@
 import React, { useState } from "react"
 import { QuestionData } from "../data"
 import Checkbox from "../components/Question/Checkbox"
-import RemindBtn from "../components/Question/RemindBtn"
 import styled from "styled-components"
+import Button from "../components/Common/Button"
+import Container from "../components/Common/Container"
 
 export default function Question() {
   let dataLength = QuestionData.length
@@ -10,14 +11,13 @@ export default function Question() {
 
   const handleCheck = (idx) => {
     checklist[idx] = !checklist[idx]
-
     if ([...checklist].filter((e) => e).length > 5) {
       alert("키워드는 5개까지만 입력해주세요.")
       // 다섯번째 취소시 에러
     } else setChecklist([...checklist])
   }
   return (
-    <QuestionContainer>
+    <Container>
       {/* user 훅스 사용? */}
       <Header>
         <Strong>김민주</Strong>님의 2021을 대표하는
@@ -37,18 +37,10 @@ export default function Question() {
           )
         })}
       </QuestionDataContainer>
-      <RemindBtn>2021 정리하기</RemindBtn>
-    </QuestionContainer>
+      <Button>2021 정리하기</Button>
+    </Container>
   )
 }
-
-const QuestionContainer = styled.main`
-  padding: 20px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  background: #ebebf2;
-`
 
 const Header = styled.h1`
   margin: 20px;
@@ -61,6 +53,8 @@ const Strong = styled.strong`
   color: #6b8df2;
 `
 const QuestionDataContainer = styled.article`
-  width: 100%;
-  margin-left: 60px;
+  width: 80%;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 3vh;
 `

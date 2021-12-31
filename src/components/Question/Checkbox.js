@@ -2,36 +2,29 @@ import styled from "styled-components"
 
 const Checkbox = ({ onClick, num, children, checked = false }) => {
   return (
-    <div>
+    <CheckContainer checked={checked}>
       <input className="sr-only" id={num} name="questions" type="checkbox" />
-      <Check onClick={onClick} checked={checked} htmlFor={num}>
+      <Check onClick={onClick} htmlFor={num}>
         {children}
       </Check>
-    </div>
+    </CheckContainer>
   )
 }
 
 export default Checkbox
+
+const CheckContainer = styled.article`
+  display: inline-block;
+  height: 40px;
+  text-align: center;
+  line-height: 40px;
+  vertical-align: baseline;
+  background: ${(props) => (props.checked ? "#6B8DF2" : "#ffffff")};
+  color: ${(props) => (props.checked ? "#ffffff" : "#000000")};
+  font-size: 18px;
+  border-radius: 10px;
+`
+
 const Check = styled.label`
-  position: relative;
-  &::before {
-    display: inline-block;
-    content: "";
-    vertical-align: middle;
-    width: 15px;
-    height: 15px;
-    background: #fff;
-  }
-  &::after {
-    display: ${(props) => (props.checked ? "inline-block" : "none")};
-    position: absolute;
-    top: 4.5px;
-    left: 3px;
-    content: "";
-    vertical-align: middle;
-    width: 10px;
-    height: 10px;
-    border-radius: 2px;
-    background: #6b8df2;
-  }
+  display: inline;
 `
