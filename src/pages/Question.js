@@ -1,5 +1,6 @@
-import React, { useState, useRef } from "react"
-import { useStore, useQuest } from "../store"
+import React, { useState, useEffect } from "react"
+import useStore from "../store"
+import { Link } from "react-router-dom"
 import { QuestionData } from "../data"
 import Checkbox from "../components/Question/Checkbox"
 import styled from "styled-components"
@@ -9,8 +10,7 @@ import Header from "../components/Common/Header"
 
 export default function Question() {
   let dataLength = QuestionData.length
-  const { name } = useStore()
-  const { editQuestion } = useQuest()
+  const { name, question, setQuest } = useStore()
   const [checklist, setChecklist] = useState(new Array(dataLength).fill(false))
 
   const handleCheck = (idx) => {
@@ -20,12 +20,6 @@ export default function Question() {
       checklist[idx] = !checklist[idx]
       setChecklist([...checklist])
     }
-  }
-
-  const handleClick = () => {
-    let selected = []
-    checklist.forEach((e, idx) => e && selected.push(QuestionData[idx]))
-    selected.forEach((e, idx) => editQuestion({ id: idx, question: e }))
   }
 
   return (
@@ -50,11 +44,7 @@ export default function Question() {
           )
         })}
       </QuestionDataContainer>
-      <Button
-        toLink={"/answer"}
-        onClick={handleClick}
-        children={"2021 기록하기"}
-      />
+      <Button toLink={"/answer"} children={"2021 기록하기"} />
     </Container>
   )
 }
