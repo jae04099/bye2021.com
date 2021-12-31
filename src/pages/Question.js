@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react"
 import useStore from "../store"
+import { Link } from "react-router-dom"
 import { QuestionData } from "../data"
 import Checkbox from "../components/Question/Checkbox"
 import styled from "styled-components"
@@ -44,7 +45,7 @@ export default function Question() {
           )
         })}
       </QuestionDataContainer>
-      <Button width={300}>2021 정리하기</Button>
+      <Button toLink={'/answer'} children={'2021 기록하기'}/>
     </Container>
   )
 }

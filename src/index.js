@@ -3,8 +3,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {
   BrowserRouter,
-  Routes,
-  Route
+  Route,
+  Routes
 } from "react-router-dom";
 import App from './App';
 import Main from "./pages/Main";
@@ -14,7 +14,7 @@ import Result from "./pages/Result";
 
 ReactDOM.render(
   <BrowserRouter>
-    <Routes>
+  <Routes>
       <Route path="/" element={<App />} />
       <Route path="main" element={<Main />} />
       <Route path="answer" element={<Answer />} />
@@ -26,4 +26,3 @@ ReactDOM.render(
 );
 
 
-ReactDOM.render(<App />, document.getElementById("root"))
