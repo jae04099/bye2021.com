@@ -27,7 +27,7 @@ const NameForm = styled.form`
   label {
     text-align: left;
     font-size: 14px;
-    margin-bottom: 15px;
+    margin-bottom: 4px;
   }
   input {
     width: 100%;

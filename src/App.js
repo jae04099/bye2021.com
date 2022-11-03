@@ -9,7 +9,7 @@ export default function App() {
   return (
     <Container>
       <Header>
-        안녕<em>2021</em>
+        안녕<span>2021</span>
       </Header>
       <Description>
         <Strong>키워드</Strong>와 <Strong>색</Strong>으로
@@ -30,7 +30,7 @@ const Header = styled.h1`
   font-size: 36px;
   font-weight: 600;
   color: ${primary700};
-  em {
+  span {
     font-style: normal;
     color: #939393;
   }
