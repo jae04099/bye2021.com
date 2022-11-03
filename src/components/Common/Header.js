@@ -4,7 +4,7 @@ import styled from "styled-components"
 export default function Header() {
   return (
     <Title>
-      안녕!<em>2021</em>✋
+      안녕<em>2021</em>
     </Title>
   )
 }

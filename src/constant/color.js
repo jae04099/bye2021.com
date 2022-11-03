@@ -1,0 +1,6 @@
+export const primary900 = "#171717"
+export const primary800 = "#222222"
+export const primary700 = "#444444"
+export const primary600 = "#6c6c6c"
+export const primary500 = "#939393"
+export const primary100 = "#E9E9E9"
