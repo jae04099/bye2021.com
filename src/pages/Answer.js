@@ -1,39 +1,37 @@
-import React, { useEffect, useState } from "react"
-import styled from "styled-components"
-import Button from "../components/Common/Button"
-import Container from "../components/Common/Container"
-import Header from "../components/Common/Header"
-import { useStore, useQuest } from "../store"
+import React, { useEffect, useState } from "react";
+import styled from "styled-components";
+import Button from "../components/Common/Button";
+import Container from "../components/Common/Container";
+import { useStore, useQuest } from "../store";
 
 export default function Answer() {
-  const { name } = useStore()
-  const { qna, editAnswer } = useQuest()
+  const { name } = useStore();
+  const { qna, editAnswer } = useQuest();
 
-  const [selQuest, setSelQuest] = useState([])
-  const [selAnswer, setSelAnswer] = useState([])
+  const [selQuest, setSelQuest] = useState([]);
+  const [selAnswer, setSelAnswer] = useState([]);
 
   useEffect(() => {
-    let qs = qna.map((e) => e.question)
-    setSelQuest(qs)
-  }, [])
+    let qs = qna.map((e) => e.question);
+    setSelQuest(qs);
+  }, []);
 
   const handleInput = (e, idx) => {
     if (e.target.value.length > 50) {
-      alert("50자 이내로 입력해주세요.")
+      alert("50자 이내로 입력해주세요.");
     } else {
-      selAnswer[idx] = e.target.value
-      setSelAnswer([...selAnswer])
+      selAnswer[idx] = e.target.value;
+      setSelAnswer([...selAnswer]);
     }
-  }
+  };
 
   const handleSubmit = () => {
     selAnswer.forEach((e, i) => {
-      editAnswer({ id: i, answer: e })
-    })
-  }
+      editAnswer({ id: i, answer: e });
+    });
+  };
   return (
     <Container>
-      <Header />
       {selQuest.map((uq, idx) => {
         return (
           <p>
@@ -48,7 +46,7 @@ export default function Answer() {
               cols={30}
             ></AnswerBox>
           </p>
-        )
+        );
       })}
       <Button
         toLink={"/result"}
@@ -56,7 +54,7 @@ export default function Answer() {
         children={"2021 정리하기"}
       />
     </Container>
-  )
+  );
 }
 
 const AnswerBox = styled.textarea`
@@ -66,4 +64,4 @@ const AnswerBox = styled.textarea`
   &:focus {
     outline: none;
   }
-`
+`;

@@ -1,15 +1,15 @@
-import React from "react"
-import styled from "styled-components"
-import FormName from "./components/Main/FormName"
-import Button from "./components/Common/Button"
-import Container from "./components/Common/Container"
-import { primary700 } from "./constant/color"
+import React from "react";
+import styled from "styled-components";
+import FormName from "./components/Main/FormName";
+import Button from "./components/Common/Button";
+import Container from "./components/Common/Container";
+import { primary700 } from "./constant/color";
 
 export default function App() {
   return (
     <Container>
       <Header>
-        안녕<span>2021</span>
+        안녕<span>2022</span>
       </Header>
       <Description>
         <Strong>키워드</Strong>와 <Strong>색</Strong>으로
@@ -22,7 +22,7 @@ export default function App() {
         <Button toLink={"/question"} children={"2021 기록하기"} />
       </Wrapper>
     </Container>
-  )
+  );
 }
 
 const Header = styled.h1`
@@ -34,19 +34,19 @@ const Header = styled.h1`
     font-style: normal;
     color: #939393;
   }
-`
+`;
 
 const Description = styled.p`
   margin: 10px 20px;
-`
+`;
 
 const Strong = styled.strong`
   color: #171717;
-`
+`;
 
 const Wrapper = styled.div`
   text-align: center;
-`
+`;
 const BookImage = styled.img`
   width: 50%;
-`
+`;
