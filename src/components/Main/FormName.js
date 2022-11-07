@@ -12,33 +12,38 @@ export default function FormName() {
           value={name}
           onChange={(e) => setName(e.target.value)}
           placeholder="이름"
-        ></input>
+        />
       </NameForm>
     </>
   )
 }
 
 const NameForm = styled.form`
-  width: 80%;
+  margin: 20px;
   label,
   input {
     display: block;
   }
   label {
+    text-align: left;
     font-size: 14px;
-    margin-bottom: 20px;
+    margin-bottom: 4px;
   }
   input {
     width: 100%;
     padding: 10px 0;
-    background: #ebebf2;
+    background: transparent;
     border: none;
-    border-bottom: 3px solid #222;
+    border-bottom: 0.7px solid #505050;
     font-size: 18px;
 
     &:focus,
     &:active {
       outline: none;
+    }
+
+    &::placeholder {
+      font-size: 14px;
     }
   }
 `

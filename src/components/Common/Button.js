@@ -23,11 +23,11 @@ const StyledLink = styled(Link)`
   // bottom: 370px;
   width: 80%;
   height: 48px;
-  font-size: 18px;
-  color: #222;
-  background: #ced0f2;
-  border-radius: 5px;
+  font-size: 14px;
+  color: white;
+  background: #4f4f4f;
+  border-radius: 15px;
   text-align: center;
-  line-height: 50px;
+  line-height: 48px;
   margin: 15px;
 `

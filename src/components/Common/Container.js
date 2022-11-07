@@ -1,13 +1,8 @@
 import styled from "styled-components"
 
 const Container = styled.main`
-  display: flex;
-  position: relative;
-  flex-direction: column;
-  justify-content: space-evenly;
-  align-items: center;
   height: 100vh;
-  background: #ebebf2;
+  background: #e9e9e9;
 `
 
 export default Container
