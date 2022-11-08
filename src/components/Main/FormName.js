@@ -19,7 +19,7 @@ export default function FormName() {
 }
 
 const NameForm = styled.form`
-  margin: 20px;
+  margin: 20px 0 52px;
   label,
   input {
     display: block;
