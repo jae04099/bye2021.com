@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
+import TypeModal from "../components/Answer/TypeModal";
 import Button from "../components/Common/Button";
 import { QuestionData } from "../data";
 import { useStore, useQuest } from "../store";
@@ -64,11 +65,13 @@ export default function Answer() {
         toLink={"/result"}
         children={"다음"}
       />
+      <TypeModal />
     </Container>
   );
 }
 
 const Container = styled.section`
+position: relative;
   max-width: 500px;
   width: calc(100% - 40px);
   height: 100%;
