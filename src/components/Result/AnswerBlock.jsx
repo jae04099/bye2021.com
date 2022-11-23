@@ -39,6 +39,8 @@ const Title = styled.p`
 
 const Contents = styled.p`
   margin: 11px 0 0 0;
+  height: calc(100% - 28px);
   font-size: 12px;
   color: #212121;
+  overflow: auto;
 `;
