@@ -1,41 +1,25 @@
-import React from "react"
-import Button from "../components/Common/Button"
-import styled from "styled-components"
-// import ResultFooter from '../components/Result/ResultFooter'
-import Tile from "../components/Result/Tile"
-import { ColorChip } from "../data"
-import { useQuest } from "../store"
+import React from "react";
+import styled from "styled-components";
+import "/node_modules/react-grid-layout/css/styles.css";
+import "/node_modules/react-resizable/css/styles.css";
+import { Responsive, WidthProvider } from "react-grid-layout";
+import { LAYOUTS } from "../constant/layout";
 
-export default function Result() {
-  const { qna } = useQuest()
+const ResponsiveGridLayout = WidthProvider(Responsive);
+
+export default function Result(props) {
   return (
-    <>
-      <Container>
-        {ColorChip.map((color, idx) => {
-          return idx < 5 ? (
-            <Tile
-              color={color}
-              key={color}
-              fontColor={idx === 0 ? "#fff" : "#000"}
-              tileCategory={qna[idx].question}
-            >
-              {qna[idx].answer}
-            </Tile>
-          ) : (
-            <Tile color={color} key={color} tileCategory={"친구 태그하기"} />
-          )
-        })}
-        {/* <Tile color={ColorChip[0]} fontColor={'#fff'} tileCategory={}/>
-            <Tile color={ColorChip[1]}/>
-            <Tile color={ColorChip[2]}/>
-            <Tile color={ColorChip[3]}/>
-            <Tile color={ColorChip[4]}/>
-            <Tile color={ColorChip[5]}/> */}
-      </Container>
-      <Button toLink={"/"} children={"다시하기"} />
-      {/* <ResultFooter /> */}
-    </>
-  )
+    <ResponsiveGridLayout
+      className="layout"
+      layouts={LAYOUTS}
+      breakpoints={{ lg: 1200 }}
+      cols={{ lg: 2 }}
+    >
+      <div key="a">1</div>
+      <div key="b">2</div>
+      <div key="c">3</div>
+    </ResponsiveGridLayout>
+  );
 }
 
 const Container = styled.div`
@@ -44,4 +28,4 @@ const Container = styled.div`
   display: grid;
   grid-template-rows: repeat(3, 1fr);
   grid-template-columns: repeat(2, 1fr);
-`
+`;
