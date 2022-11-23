@@ -1,8 +1,29 @@
-import React from "react"
-import { Link } from "react-router-dom"
-import styled from "styled-components"
+import React from "react";
+import { useEffect, useState } from "react";
+import styled from "styled-components";
 
-export default function TypeModal() {
+export default function TypeModal({ setShow, setFinDataList, clickedKeyword }) {
+    const [answerType, setAnswerType] = useState('pic');
+    const handleRecordType = (e) => {
+        e.stopPropagation();
+        e.preventDefault();
+        setAnswerType(e.target.value);
+    }
+    const splitedKeywordList = clickedKeyword.split(" ");
+    const handleSubmitType = () => {
+        setFinDataList(prev => ([
+            ...prev,
+            {
+                full_keyword: clickedKeyword,
+                keyword: splitedKeywordList[0],
+                keyword_icon: splitedKeywordList[1],
+                type: answerType,
+                content: '',
+                pic_url: ''
+            }
+        ]))
+        setShow(false);
+    }
     return (
         <Container>
             <Dimmed>
@@ -13,17 +34,19 @@ export default function TypeModal() {
                             <PhotoTypeSection>
                                 <img src="/image/photo_type.png" alt="type icon"></img>
                                 <span>사진 형식</span>
-                                <button><span className="checked"></span></button>
+                                <div className="button_wrap">
+                                    <button value="pic" onClick={(e) => handleRecordType(e)} className={(answerType === "pic") && "checked"}></button></div>
                             </PhotoTypeSection>
                             <WriteTypeSection>
                                 <img src="/image/write_type.png" alt="write type icon"></img>
                                 <span>글 형식</span>
-                                <button><span></span></button>
+                                <div className="button_wrap">
+                                    <button value="no_pic" onClick={(e) => handleRecordType(e)} className={(answerType === "no_pic") && "checked"}></button></div>
                             </WriteTypeSection>
                         </ContWrap>
-                        <button>확인</button>
+                        <button onClick={handleSubmitType}>확인</button>
                     </ModalInnerWrap>
-                    <button>닫기</button>
+                    <button onClick={() => setShow(false)}>닫기</button>
                 </ModalWrap>
             </Dimmed>
         </Container>
@@ -96,7 +119,7 @@ align-items: center;
 > span {
     margin-bottom: 10px;
 }
-> button {
+> div {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -104,12 +127,17 @@ align-items: center;
     height: 20px;
     border: 1px solid #969696;
     border-radius: 50%;
-    > span {
-        background: #9091ed;
+    > button {
+        display: inline-block;
+        background: #fff;
         width: 12px;
         height: 12px;
         border-radius: 50%;
+        &.checked {
+            background: #9091ed;
+        }
     }
+
 }
 `
 const WriteTypeSection = styled.div`
@@ -124,7 +152,7 @@ align-items: center;
 > span {
     margin-bottom: 10px;
 }
-> button {
+> div {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -132,11 +160,16 @@ align-items: center;
     height: 20px;
     border: 1px solid #969696;
     border-radius: 50%;
-    > span {
-        background: #9091ed;
+    > button {
+        display: inline-block;
+        background: #fff;
         width: 12px;
         height: 12px;
         border-radius: 50%;
+        &.checked {
+            background: #9091ed;
+        }
     }
+
 }
 `

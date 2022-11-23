@@ -16,6 +16,7 @@ const Container = styled.div`
   width: 100%;
   display: flex;
   justify-content: center;
+  margin-bottom: 48px;
 `
 
 const StyledLink = styled(Link)`

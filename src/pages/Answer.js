@@ -1,20 +1,28 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import TypeModal from "../components/Answer/TypeModal";
+import AnswerBox from "../components/Answer/AnswerBox";
 import Button from "../components/Common/Button";
 import { QuestionData } from "../data";
-import { useStore, useQuest } from "../store";
 
 export default function Answer() {
-  const { name } = useStore();
-  const { qna, editAnswer } = useQuest();
-
-  const [clicked, setClicked] = useState(false);
+  const [isShow, setShow] = useState(false);
+  const [clickedKeyword, setClickedKeyword] = useState('');
   const [clickedList, setClickedList] = useState([]);
+  const [finDataList, setFinDataList] = useState([]);
+
+  useEffect(() => { }, [finDataList])
 
   const handleActiveBadge = (e, idx) => {
-    setClickedList({})
-    console.log(clickedList);
+    if (finDataList.length === 5) {
+      alert('이미 5개를 선택 하셨습니다.')
+    } else if (finDataList.filter(item => item.full_keyword === e.target.value).length === 1) {
+      return null;
+    } else {
+      setShow(true);
+      setClickedKeyword(e.target.value);
+      setClickedList([e.target.value, ...clickedList])
+    }
   }
   return (
     <Container>
@@ -22,50 +30,19 @@ export default function Answer() {
       <h5>2022년의 단어는 무엇인가요?</h5>
       <KeywordContainer>
         {QuestionData.map((item, index) => {
-          return <button onClick={e => handleActiveBadge(e, index)} key={index} className={clicked && "active"} value={item}><span>{item}</span></button>
+          return <button onClick={e => handleActiveBadge(e, index)} key={index} className={finDataList.filter(e => e.full_keyword == item).length === 1 ? "active" : null} value={item}><span>{item}</span></button>
         })}
-
       </KeywordContainer>
       <AnswerWrap>
-        <AnswerPiece>
-          <img className="close_icon" src="/image/close.png" alt="" />
-          <PieceInnerWrap>
-            <div className="keyword_icon">🎧</div>
-            <span className="char_cnt">121/500</span>
-            <MainContWrap>
-              <h2 className="title">음악</h2>
-              <textarea id="story" name="story" placeholder="내용을 입력해주세요"
-                rows="5" cols="33">
-              </textarea>
-            </MainContWrap>
-          </PieceInnerWrap>
-        </AnswerPiece>
-        <AnswerPiece className="photo_type">
-          <img className="close_icon" src="/image/close.png" alt="" />
-          <PieceInnerWrap className="photo_type_inner_wrap">
-            <div className="keyword_icon">🎧</div>
-            <MainContWrap>
-              <h2 className="title">음악</h2>
-              <button className="upload_btn">사진업로드</button>
-            </MainContWrap>
-          </PieceInnerWrap>
-        </AnswerPiece>
-        <AnswerPiece className="photo_type">
-          <img className="close_icon" src="/image/close.png" alt="" />
-          <PieceInnerWrap className="photo_type_inner_wrap">
-            <div className="keyword_icon">🎧</div>
-            <MainContWrap>
-              <h2 className="title">음악</h2>
-              <button className="upload_btn">사진업로드</button>
-            </MainContWrap>
-          </PieceInnerWrap>
-        </AnswerPiece>
+        {finDataList.map((e, index) => {
+          return <AnswerBox key={`${index}`} data={e} finDataList={finDataList} setFinDataList={setFinDataList} />
+        })}
       </AnswerWrap>
       <Button
         toLink={"/result"}
         children={"다음"}
       />
-      <TypeModal />
+      {isShow && <TypeModal setShow={setShow} setFinDataList={setFinDataList} clickedKeyword={clickedKeyword} />}
     </Container>
   );
 }
@@ -96,7 +73,7 @@ flex-wrap: wrap;
 margin-top: 10px;
 margin-bottom: 17px;
 gap: 6px;
-button {
+ > button {
   padding: 5px 8px;
   border-radius: 15px;
   background: #6a6a6a;
@@ -107,7 +84,7 @@ button {
     font-size: 12px;
     color: #fff;
   }
-  .active {
+ &.active {
     background: #454545;
   }
 }
@@ -118,78 +95,3 @@ display: flex;
 flex-wrap: wrap;
 margin-bottom: 40px;
 `;
-
-const AnswerPiece = styled.div`
-position: relative;
-width: 100%;
-border-radius: 15px;
-box-shadow: 0 2px 9px 0 rgba(0, 0, 0, 0.15);
-padding: 20px 11px;
-margin-bottom: 7px;
-background: #fff;
-> .close_icon {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  width: 10px;
-  height: 10px;
-  cursor: pointer;
-}
-&.photo_type {
-  display: flex;
-  justify-content: center;
-  margin-right: 7px;
-  width: calc(100% / 2 - 25.5px);
-  &:last-child{
-    margin-right: unset;
-  }
-}
-`
-const PieceInnerWrap = styled.div`
-position: relative;
-display: flex;
-width: calc(100% - 24px);
-> .char_cnt {
-position: absolute;
-font-size: 8px;
-color: #272727;
-top: 0;
-right: 0;
-}
-> .keyword_icon {
-  height: fit-content;
-  padding: 6px;
-  background: #EDEDED;
-  border-radius: 15px;
-  font-size: 20px;
-  margin-right: 12px;
-}
-&.photo_type_inner_wrap {
-  flex-direction: column;
-  text-align: center;
-  align-items: center;
-  > .keyword_icon {
-    margin-right: unset;
-    margin-bottom: 8px;
-  }
-.title {
-    margin-bottom: 8px;
-  }
-  > .upload_btn {
-
-  }
-}
-`
-const MainContWrap = styled.div`
-width: 100%;
-align-items: center;
- > textarea {
-  width: 100%;
-  border: none;
-  resize: none;
-  margin-top: 7px;
-  &:focus {
-    outline: none;
-  }
- }
-`
