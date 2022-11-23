@@ -19,14 +19,13 @@ export default function App() {
       <Wrapper>
         <BookImage src="/image/favorite-book.png" alt="" />
         <FormName />
-        <Button toLink={"/question"} children={"2021 기록하기"} />
+        <Button toLink={"/answer"} children={"2022 정리하기"} />
       </Wrapper>
     </Container>
   );
 }
 
 const Header = styled.h1`
-  padding: 88px 20px 0;
   font-size: 36px;
   font-weight: 600;
   color: ${primary700};
@@ -37,7 +36,8 @@ const Header = styled.h1`
 `;
 
 const Description = styled.p`
-  margin: 10px 20px;
+  margin-top: 15px;
+  line-height: 20px;
 `;
 
 const Strong = styled.strong`

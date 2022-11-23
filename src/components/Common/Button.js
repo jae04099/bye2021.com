@@ -13,15 +13,14 @@ export default function Button({ toLink, children, onClick = undefined }) {
 }
 
 const Container = styled.div`
-  width: 100vw;
+  width: 100%;
   display: flex;
   justify-content: center;
+  margin-bottom: 48px;
 `
 
 const StyledLink = styled(Link)`
-  // position: absolute;
-  // bottom: 370px;
-  width: 80%;
+  width: 100%;
   height: 48px;
   font-size: 14px;
   color: white;
@@ -29,5 +28,4 @@ const StyledLink = styled(Link)`
   border-radius: 15px;
   text-align: center;
   line-height: 48px;
-  margin: 15px;
 `
