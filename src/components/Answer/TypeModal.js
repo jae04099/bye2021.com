@@ -75,7 +75,9 @@ background: #fff;
 margin: 0 20px;
 padding: 42px 45px 30px;
 border-radius: 15px;
+width: fit-content;
 height: fit-content;
+z-index: 1;
 > button {
     position: absolute;
     top: 10px;
@@ -109,8 +111,12 @@ margin-bottom: 30px;
 `
 const PhotoTypeSection = styled.div`
 display: flex;
+width: calc(100% / 2);
 flex-direction: column;
 align-items: center;
+justify-content: center;
+text-align: center;
+aspect-ratio: 1 / 1;
 > img {
     width: 100px;
     height: 100px;
@@ -144,6 +150,7 @@ const WriteTypeSection = styled.div`
 display: flex;
 flex-direction: column;
 align-items: center;
+text-align: center;
 > img {
     width: 100px;
     height: 100px;
