@@ -1,10 +1,13 @@
 import React from "react"
-import { useEffect, useState, useRef } from "react";
+import { useState, useRef } from "react";
 import styled from "styled-components"
+import { useRecoilState } from "recoil";
+import { finDataListState } from "../../atom";
 
-export default function AnswerBox({ data, finDataList, setFinDataList }) {
+export default function AnswerBox({ data, index }) {
   const [desc, setDesc] = useState('');
   const [attach, setAttach] = useState('');
+  const [finDataList, setFinDataList] = useRecoilState(finDataListState);
   const ref = useRef();
   const handleInputButton = () => {
     ref.current && ref.current.click();
@@ -12,6 +15,25 @@ export default function AnswerBox({ data, finDataList, setFinDataList }) {
   const handleDesc = (e) => {
     setDesc(e.slice(0, 150));
   }
+  const handleSaveDesc = () => {
+    const newState = finDataList.map((obj, idx) => {
+      if (obj.keyword === data.keyword) {
+        return { ...obj, content: desc }
+      }
+      return obj;
+    })
+    setFinDataList(newState)
+  }
+  const handleSaveImg = (props) => {
+    const newState = finDataList.map((obj, idx) => {
+      if (obj.keyword === data.keyword) {
+        return { ...obj, pic_url: props }
+      }
+      return obj;
+    })
+    setFinDataList(newState)
+  }
+  console.log(finDataList)
   // alert 줘야하나 삭제해도 된다고?
   const handleCloseBox = (e) => {
     e.preventDefault();
@@ -30,6 +52,7 @@ export default function AnswerBox({ data, finDataList, setFinDataList }) {
           const { result } = event.target;
           if (result) {
             setAttach(result);
+            handleSaveImg(result)
           }
         });
         reader.readAsDataURL(files[i]);
@@ -48,6 +71,7 @@ export default function AnswerBox({ data, finDataList, setFinDataList }) {
             <MainContWrap>
               <h2 className="title">{data.keyword}</h2>
               <textarea id="story" name="story" placeholder="내용을 입력해주세요" value={desc} onChange={e => handleDesc(e.target.value)}
+                onBlur={handleSaveDesc}
                 rows="5" cols="33">
               </textarea>
             </MainContWrap>
@@ -117,6 +141,7 @@ right: 0;
 }
 > .keyword_icon {
   width: fit-content;
+  height: fit-content;
   padding: 10px;
   background: #EDEDED;
   border-radius: 15px;

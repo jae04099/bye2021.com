@@ -1,9 +1,14 @@
 import React from "react";
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import { useRecoilState } from "recoil";
+import { clickedKeywordState, isShowState, finDataListState } from "../../atom";
 import styled from "styled-components";
 
-export default function TypeModal({ setShow, setFinDataList, clickedKeyword }) {
+export default function TypeModal() {
     const [answerType, setAnswerType] = useState('pic');
+    const [, setShow] = useRecoilState(isShowState);
+    const [clickedKeyword] = useRecoilState(clickedKeywordState);
+    const [, setFinDataList] = useRecoilState(finDataListState);
     const handleRecordType = (e) => {
         e.stopPropagation();
         e.preventDefault();
@@ -19,7 +24,8 @@ export default function TypeModal({ setShow, setFinDataList, clickedKeyword }) {
                 keyword_icon: splitedKeywordList[1],
                 type: answerType,
                 content: '',
-                pic_url: ''
+                pic_url: '',
+                writable: true
             }
         ]))
         setShow(false);

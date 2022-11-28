@@ -1,15 +1,18 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import TypeModal from "../components/Answer/TypeModal";
 import AnswerBox from "../components/Answer/AnswerBox";
 import Button from "../components/Common/Button";
 import { QuestionData } from "../data";
+import { useRecoilState } from "recoil";
+import { clickedKeywordState, isShowState, finDataListState } from "../atom";
+import { useNavigate } from "react-router-dom";
 
 export default function Answer() {
-  const [isShow, setShow] = useState(false);
-  const [clickedKeyword, setClickedKeyword] = useState('');
-  const [clickedList, setClickedList] = useState([]);
-  const [finDataList, setFinDataList] = useState([]);
+  const navigate = useNavigate();
+  const [isShow, setShow] = useRecoilState(isShowState);
+  const [, setClickedKeyword] = useRecoilState(clickedKeywordState);
+  const [finDataList] = useRecoilState(finDataListState);
 
   useEffect(() => { }, [finDataList])
 
@@ -21,7 +24,19 @@ export default function Answer() {
     } else {
       setShow(true);
       setClickedKeyword(e.target.value);
-      setClickedList([e.target.value, ...clickedList])
+    }
+  }
+  console.log(finDataList)
+
+  const checkIsContEmpty = () => {
+    let tmpPicType = finDataList.filter(item => item.content === 'pic');
+    let tmpNoPicType = finDataList.filter(item => item.content === 'no_pic');
+    if (tmpPicType.filter(item => item.pic_url === '') || tmpNoPicType.filter(item => item.content === '')) {
+      return alert('모든 칸을 채워주세요!')
+    } else if (finDataList[0] === [] || finDataList.length === 0) {
+      return alert('키워드를 선택 해 주세요!')
+    } else {
+      return navigate('/result');
     }
   }
   return (
@@ -35,14 +50,15 @@ export default function Answer() {
       </KeywordContainer>
       <AnswerWrap>
         {finDataList.map((e, index) => {
-          return <AnswerBox key={`${index}`} data={e} finDataList={finDataList} setFinDataList={setFinDataList} />
+          return <AnswerBox key={`${index}`} data={e} index={index} />
         })}
       </AnswerWrap>
       <Button
-        toLink={"/result"}
+        toLink={checkIsContEmpty}
+        onClick={checkIsContEmpty}
         children={"다음"}
       />
-      {isShow && <TypeModal setShow={setShow} setFinDataList={setFinDataList} clickedKeyword={clickedKeyword} />}
+      {isShow && <TypeModal />}
     </Container>
   );
 }
