@@ -1,32 +1,53 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
-import { Responsive, WidthProvider } from "react-grid-layout";
-import { LAYOUTS } from "../constant/layout";
 import { AnswerBlock } from "../components/Result/AnswerBlock";
 
-const ResponsiveGridLayout = WidthProvider(Responsive);
-
 export default function Result(props) {
+  function masonryLayout() {
+    const masonryContainerStyle = getComputedStyle(
+      document.querySelector(".masonry-container"),
+    );
+    const autoRows = parseInt(
+      masonryContainerStyle.getPropertyValue("grid-auto-rows"),
+    );
+
+    document.querySelectorAll(".masonry-item").forEach((elt) => {
+      elt.style.gridRowEnd = `span ${Math.ceil(elt.scrollHeight / autoRows)}`;
+    });
+  }
+
+  useEffect(() => {
+    masonryLayout();
+    window.addEventListener("resize", masonryLayout);
+  }, []);
+
   return (
-    <Container>
-      <ResponsiveGridLayout
-        className="layout"
-        layouts={LAYOUTS}
-        breakpoints={{ lg: 1200 }}
-        cols={{ lg: 2 }}
-        margin={[16, 13]}
-        containerPadding={[20, 20]}
-      >
-        {LAYOUTS.lg.map((el) => (
-          <AnswerBlock key={el.i} datakey={el.i} />
-        ))}
-      </ResponsiveGridLayout>
+    <Container className="masonry-container">
+      <AnswerBlock text={"lorem"} />
+      <AnswerBlock
+        text={
+          "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Totam, quaerat omnis labore quo dolorem nostrum beatae voluptatem harum assumenda hic cupiditate, eaque, culpa fugit distinctio at? Amet laboriosam nam nesciunt?Lorem ipsum dolor sit amet consectetur, adipisicing elit. Totam, quaerat omnis labore quo dolorem nostrum beatae voluptatem harum assumenda hic cupiditate, eaque, culpa fugit distinctio at? Amet laboriosam nam nesciunt?Lorem ipsum dolor sit amet consectetur, adipisicing elit. Totam, quaerat omnis labore quo dolorem nostrum beatae voluptatem harum assumenda hic cupiditate, eaque, culpa fugit distinctio at? Amet laboriosam nam nesciunt?"
+        }
+      />
+      <AnswerBlock
+        text={
+          "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Totam, quaerat omnis labore quo dolorem nostrum beatae voluptatem harum assumenda hic cupiditate, eaque, culpa fugit distinctio at? Amet laboriosam nam nesciunt?"
+        }
+      />
+      <AnswerBlock
+        text={
+          "lorem Lorem ipsum dolor sit amet consectetur, adipisicing elit. Totam, quaerat omnis labore quo doloreLorem ipsum dolor sit amet consectetur, adipisicing elit. Totam, quaerat omnis labore quo doloreLorem ipsum dolor sit amet consectetur, adipisicing elit. Totam, quaerat omnis labore quo doloreLorem ipsum dolor sit amet consectetur, adipisicing elit. Totam, quaerat omnis labore quo dolore"
+        }
+      />
     </Container>
   );
 }
 
 const Container = styled.div`
-  width: 100%;
+  display: grid;
   height: 100vh;
+  grid-template-columns: repeat(2, 1fr);
+  column-gap: 10px;
+  grid-auto-rows: 10px;
   background-color: #000000;
 `;
