@@ -26,12 +26,11 @@ export default function Answer() {
       setClickedKeyword(e.target.value);
     }
   }
-  console.log(finDataList)
 
   const checkIsContEmpty = () => {
     let tmpPicType = finDataList.filter(item => item.content === 'pic');
     let tmpNoPicType = finDataList.filter(item => item.content === 'no_pic');
-    if (tmpPicType.filter(item => item.pic_url === '') || tmpNoPicType.filter(item => item.content === '')) {
+    if (tmpPicType.filter(item => item.pic_url == '').length > 0 || tmpNoPicType.filter(item => item.content == '').length > 0) {
       return alert('모든 칸을 채워주세요!')
     } else if (finDataList[0] === [] || finDataList.length === 0) {
       return alert('키워드를 선택 해 주세요!')
@@ -68,8 +67,7 @@ position: relative;
   max-width: 500px;
   width: calc(100% - 40px);
   height: 100%;
-  min-height: 100vh;
-  margin: 0 auto;
+  min-height: calc(100vh - 88px);  margin: 0 auto;
   padding: 88px 20px 0;
   background: #e9e9e9;
   h1 {
@@ -109,5 +107,6 @@ gap: 6px;
 const AnswerWrap = styled.div`
 display: flex;
 flex-wrap: wrap;
+
 margin-bottom: 40px;
 `;

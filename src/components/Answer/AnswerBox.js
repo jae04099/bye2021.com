@@ -33,7 +33,6 @@ export default function AnswerBox({ data, index }) {
     })
     setFinDataList(newState)
   }
-  console.log(finDataList)
   // alert 줘야하나 삭제해도 된다고?
   const handleCloseBox = (e) => {
     e.preventDefault();
@@ -123,6 +122,7 @@ overflow: hidden;
 .bg_img {
   position: absolute;
   top: 0;
+  width: 100%;
   height: 100%;
   object-fit: cover;
 }
@@ -183,9 +183,13 @@ right: 0;
 }
 `
 const MainContWrap = styled.div`
-width: 100%;
+display: inline-block;
+padding: 3px;
 align-items: center;
 position: relative;
+background: rgba(0, 0, 0, 0.3);
+border-radius: 5px;
+color: #fff;
  > textarea {
   width: 100%;
   border: none;
