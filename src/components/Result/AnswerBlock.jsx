@@ -1,8 +1,11 @@
 import styled from "styled-components";
+import tinycolor from "tinycolor2";
 
-export const AnswerBlock = ({ text }) => {
+export const AnswerBlock = ({ text, bgColor }) => {
+  console.log(bgColor);
+  console.log(tinycolor(bgColor).isDark());
   return (
-    <Container className="masonry-item">
+    <Container className="masonry-item" bgcolor={bgColor}>
       <Title>영화 🎬</Title>
       <Contents>{text}</Contents>
     </Container>
@@ -12,21 +15,19 @@ export const AnswerBlock = ({ text }) => {
 const Container = styled.div`
   box-sizing: border-box;
   padding: 10px 11px;
-  /* width: calc(100% - 10px); */
-  height: fit-content;
-  background-color: #ffffff;
+  background-color: ${({ bgcolor }) => bgcolor || "#ffffff"};
   border-radius: 15px;
+  color: ${({ bgcolor }) =>
+    tinycolor(bgcolor).isDark() ? "#ffffff" : "#000000"};
 `;
 
 const Title = styled.p`
   margin: 0;
   font-size: 16px;
   font-weight: 700;
-  color: #212121;
 `;
 
 const Contents = styled.p`
   margin: 11px 0 0 0;
   font-size: 12px;
-  color: #212121;
 `;
