@@ -11,10 +11,9 @@ export const AnswerImage = ({ data }) => {
 
 const Container = styled.div`
   padding: 10px 11px;
-  background: url(${({ bgImage }) => bgImage}) center center no-repeat
-    rgba(0, 0, 0, 0.4);
+  background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0)),
+    url(${({ bgImage }) => bgImage}) center center no-repeat;
   background-size: cover;
-  background-blend-mode: multiply;
   border-radius: 15px;
   color: #ffffff;
 `;
