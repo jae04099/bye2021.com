@@ -2,8 +2,6 @@ import styled from "styled-components";
 import tinycolor from "tinycolor2";
 
 export const AnswerBlock = ({ text, bgColor }) => {
-  console.log(bgColor);
-  console.log(tinycolor(bgColor).isDark());
   return (
     <Container className="masonry-item" bgcolor={bgColor}>
       <Title>영화 🎬</Title>

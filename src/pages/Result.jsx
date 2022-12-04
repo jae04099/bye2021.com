@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { AnswerBlock } from "../components/Result/AnswerBlock";
 import tinycolor from "tinycolor2";
 
-export default function Result(props) {
+const Result = () => {
   const [pointColor, setPointColor] = useState(null);
 
   function masonryLayout() {
@@ -66,7 +66,9 @@ export default function Result(props) {
       </GridContainer>
     </Container>
   );
-}
+};
+
+export default Result;
 
 const Container = styled.div`
   height: 100vh;
