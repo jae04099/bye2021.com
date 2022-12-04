@@ -2,67 +2,86 @@ import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { AnswerBlock } from "../components/Result/AnswerBlock";
 import tinycolor from "tinycolor2";
+import { useRecoilState } from "recoil";
+import { finDataListState } from "../atom";
+import { AnswerImage } from "../components/Result/AnswerImage";
 
 const Result = () => {
   const [pointColor, setPointColor] = useState(null);
+  const [finDataList] = useRecoilState(finDataListState);
 
   function masonryLayout() {
-    const masonryContainerStyle = getComputedStyle(
-      document.querySelector(".masonry-container"),
-    );
+    const container = document.querySelector(".masonry-container");
+    const masonryContainerStyle = getComputedStyle(container);
 
     const autoRows = parseInt(
       masonryContainerStyle.getPropertyValue("grid-auto-rows"),
     );
 
     document.querySelectorAll(".masonry-item").forEach((elt) => {
-      elt.style.gridRowEnd = `span ${Math.ceil(
-        elt.scrollHeight / autoRows / 1.4,
-      )}`;
+      const scrollHeight = elt.scrollHeight;
+
+      elt.style.gridRowEnd = `span ${Math.ceil(scrollHeight / autoRows / 1.4)}`;
+    });
+
+    document.querySelectorAll(".masonry-item-image").forEach((elt) => {
+      const imgWidth = container.scrollWidth / 2 - 10;
+
+      elt.style.gridRowEnd = `span ${Math.ceil(imgWidth / autoRows / 2)}`;
     });
   }
 
   useEffect(() => {
     masonryLayout();
-    window.addEventListener("resize", masonryLayout);
   }, []);
+
+  const getRandomColor = (index) => {
+    if (index === 0) return pointColor;
+    const randomValue = Math.floor(Math.random() * 10);
+    const bgColor = Math.floor(Math.random() * 1)
+      ? tinycolor(pointColor || "#ffffff").darken(randomValue * 10)
+      : tinycolor(pointColor || "#ffffff").brighten(randomValue * 10);
+
+    return bgColor;
+  };
 
   return (
     <Container>
       <Nav>
         <div>
-          <ColorLabel htmlFor="color">🎨</ColorLabel>
+          <ColorLabel htmlFor="color">
+            <span>🎨</span> <ColorSet bgcolor={pointColor}></ColorSet>
+          </ColorLabel>
           <ColorInput
             id="color"
             type="color"
             onChange={(e) => setPointColor(e.target.value)}
           />
-          <ColorSet bgcolor={pointColor}></ColorSet>
+        </div>
+        <div>
+          <RandomButton
+            type="button"
+            onClick={() => setPointColor(tinycolor.random().toHexString())}
+          >
+            🎲
+          </RandomButton>
         </div>
       </Nav>
       <GridContainer className="masonry-container">
-        <AnswerBlock
-          text={"lorem"}
-          bgColor={tinycolor(pointColor || "#ffffff").brighten(30)}
-        />
-        <AnswerBlock
-          text={
-            "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Totam, quaerat omnis labore quo dolorem nostrum beatae voluptatem harum assumenda hic cupiditate, eaque, culpa fugit distinctio at? Amet laboriosam nam nesciunt?Lorem ipsum dolor sit amet consectetur, adipisicing elit. Totam, quaerat omnis labore quo dolorem nostrum beatae voluptatem harum assumenda hic cupiditate, eaque, culpa fugit distinctio at? Amet laboriosam nam nesciunt?Lorem ipsum dolor sit amet consectetur, adipisicing elit. Totam, quaerat omnis labore quo dolorem nostrum beatae voluptatem harum assumenda hic cupiditate, eaque, culpa fugit distinctio at? Amet laboriosam nam nesciunt?"
-          }
-          bgColor={tinycolor(pointColor || "#ffffff").darken(10)}
-        />
-        <AnswerBlock
-          text={
-            "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Totam, quaerat omnis labore quo dolorem nostrum beatae voluptatem harum assumenda hic cupiditate, eaque, culpa fugit distinctio at? Amet laboriosam nam nesciunt?"
-          }
-          bgColor={tinycolor(pointColor || "#ffffff").brighten(30)}
-        />
-        <AnswerBlock
-          text={
-            "lorem Lorem ipsum dolor sit amet consectetur, adipisicing elit. Totam, quaerat omnis labore quo doloreLorem ipsum dolor sit amet consectetur, adipisicing elit. Totam, quaerat omnis labore quo doloreLorem ipsum dolor sit amet consectetur, adipisicing elit. Totam, quaerat omnis labore quo doloreLorem ipsum dolor sit amet consectetur, adipisicing elit. Totam, quaerat omnis labore quo dolore"
-          }
-          bgColor={tinycolor(pointColor || "#ffffff").darken(30)}
-        />
+        {finDataList.map((data, index) => {
+          const { content, keyword } = data;
+
+          if (content)
+            return (
+              <AnswerBlock
+                key={keyword}
+                data={data}
+                data-type="text"
+                bgColor={getRandomColor(index)}
+              />
+            );
+          return <AnswerImage key={keyword} data={data} data-type="image" />;
+        })}
       </GridContainer>
     </Container>
   );
@@ -71,12 +90,12 @@ const Result = () => {
 export default Result;
 
 const Container = styled.div`
-  height: 100vh;
+  min-height: 100vh;
   background-color: #000000;
 `;
 
 const Nav = styled.nav`
-  padding: 87px 0 16px;
+  padding: 87px 20px 16px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -84,11 +103,14 @@ const Nav = styled.nav`
 
 const GridContainer = styled.div`
   display: grid;
+  /* padding: 20px; */
+  box-sizing: border-box;
+  width: 100%;
   grid-template-columns: repeat(2, 1fr);
   gap: 5px;
-  grid-auto-rows: 10px;
+  grid-auto-rows: 5px;
 
-  & div:first-of-type {
+  & div[data-type="text"]:first-of-type {
     grid-column: 1/3;
   }
 `;
@@ -98,7 +120,7 @@ const ColorLabel = styled.label`
   margin-right: 6px;
 `;
 const ColorInput = styled.input`
-  display: none;
+  opacity: 0;
 `;
 
 const ColorSet = styled.div`
@@ -108,4 +130,8 @@ const ColorSet = styled.div`
   border-radius: 15px;
   background: ${({ bgcolor }) =>
     bgcolor || "linear-gradient(270deg, #00ff19 0%, #6d79ec 99.99%)"};
+`;
+
+const RandomButton = styled.button`
+  font-size: 20px;
 `;

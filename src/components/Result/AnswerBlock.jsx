@@ -1,11 +1,12 @@
 import styled from "styled-components";
 import tinycolor from "tinycolor2";
 
-export const AnswerBlock = ({ text, bgColor }) => {
+export const AnswerBlock = ({ data, bgColor }) => {
+  const { content, full_keyword } = data;
   return (
     <Container className="masonry-item" bgcolor={bgColor}>
-      <Title>영화 🎬</Title>
-      <Contents>{text}</Contents>
+      <Title>{full_keyword}</Title>
+      <Contents>{content}</Contents>
     </Container>
   );
 };
@@ -15,8 +16,9 @@ const Container = styled.div`
   padding: 10px 11px;
   background-color: ${({ bgcolor }) => bgcolor || "#ffffff"};
   border-radius: 15px;
+  word-break: break-all;
   color: ${({ bgcolor }) =>
-    tinycolor(bgcolor).isDark() ? "#ffffff" : "#000000"};
+    tinycolor(bgcolor || "#ffffff").isDark() ? "#ffffff" : "#000000"};
 `;
 
 const Title = styled.p`
