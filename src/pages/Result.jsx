@@ -1,10 +1,11 @@
-import { useEffect, useState } from "react";
+import { createElement, useEffect, useState } from "react";
 import styled from "styled-components";
 import { AnswerBlock } from "../components/Result/AnswerBlock";
 import tinycolor from "tinycolor2";
 import { useRecoilState } from "recoil";
 import { finDataListState } from "../atom";
 import { AnswerImage } from "../components/Result/AnswerImage";
+import html2canvas from "html2canvas";
 
 const Result = () => {
   const [pointColor, setPointColor] = useState(null);
@@ -45,6 +46,17 @@ const Result = () => {
     return bgColor;
   };
 
+  const captureResult = () => {
+    html2canvas(document.getElementById("capture"), {
+      backgroundColor: "#000000",
+    }).then(function (canvas) {
+      const downloadLink = document.createElement("a");
+      downloadLink.download = "filename.png";
+      downloadLink.href = canvas.toDataURL();
+      downloadLink.click();
+    });
+  };
+
   return (
     <Container>
       <Nav>
@@ -67,7 +79,7 @@ const Result = () => {
           </RandomButton>
         </div>
       </Nav>
-      <GridContainer className="masonry-container">
+      <GridContainer id="capture" className="masonry-container">
         {finDataList.map((data, index) => {
           const { content, keyword } = data;
 
@@ -83,6 +95,12 @@ const Result = () => {
           return <AnswerImage key={keyword} data={data} data-type="image" />;
         })}
       </GridContainer>
+      <ButtonContainer>
+        <ResultButton type="button" onClick={captureResult}>
+          이미지로 저장하기
+        </ResultButton>
+        <ResultButton>링크 복사</ResultButton>
+      </ButtonContainer>
     </Container>
   );
 };
@@ -134,4 +152,22 @@ const ColorSet = styled.div`
 
 const RandomButton = styled.button`
   font-size: 20px;
+`;
+
+const ButtonContainer = styled.div`
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  margin-top: 30px;
+  gap: 10px;
+`;
+
+const ResultButton = styled.button`
+  display: inline-block;
+  width: 100%;
+  height: 48px;
+  background: none;
+  border: 1px solid #ffffff;
+  border-radius: 15px;
+  color: #ffffff;
+  font-size: 14px;
 `;
