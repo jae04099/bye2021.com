@@ -1,9 +1,14 @@
 import React from "react";
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import { useRecoilState } from "recoil";
+import { clickedKeywordState, isShowState, finDataListState } from "../../atom";
 import styled from "styled-components";
 
-export default function TypeModal({ setShow, setFinDataList, clickedKeyword }) {
+export default function TypeModal() {
     const [answerType, setAnswerType] = useState('pic');
+    const [, setShow] = useRecoilState(isShowState);
+    const [clickedKeyword] = useRecoilState(clickedKeywordState);
+    const [, setFinDataList] = useRecoilState(finDataListState);
     const handleRecordType = (e) => {
         e.stopPropagation();
         e.preventDefault();
@@ -19,7 +24,8 @@ export default function TypeModal({ setShow, setFinDataList, clickedKeyword }) {
                 keyword_icon: splitedKeywordList[1],
                 type: answerType,
                 content: '',
-                pic_url: ''
+                pic_url: '',
+                writable: true
             }
         ]))
         setShow(false);
@@ -75,7 +81,9 @@ background: #fff;
 margin: 0 20px;
 padding: 42px 45px 30px;
 border-radius: 15px;
+width: fit-content;
 height: fit-content;
+z-index: 1;
 > button {
     position: absolute;
     top: 10px;
@@ -109,8 +117,12 @@ margin-bottom: 30px;
 `
 const PhotoTypeSection = styled.div`
 display: flex;
+width: calc(100% / 2);
 flex-direction: column;
 align-items: center;
+justify-content: center;
+text-align: center;
+aspect-ratio: 1 / 1;
 > img {
     width: 100px;
     height: 100px;
@@ -144,6 +156,7 @@ const WriteTypeSection = styled.div`
 display: flex;
 flex-direction: column;
 align-items: center;
+text-align: center;
 > img {
     width: 100px;
     height: 100px;

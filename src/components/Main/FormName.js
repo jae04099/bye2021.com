@@ -19,6 +19,7 @@ export default function FormName() {
 }
 
 const NameForm = styled.form`
+position: relative;
   margin: 20px 0 52px;
   label,
   input {
@@ -30,13 +31,12 @@ const NameForm = styled.form`
     margin-bottom: 4px;
   }
   input {
+    position: relative;
     width: 100%;
     padding: 10px 0;
     background: transparent;
     border: none;
-    border-bottom: 0.7px solid #505050;
     font-size: 18px;
-
     &:focus,
     &:active {
       outline: none;
@@ -46,4 +46,13 @@ const NameForm = styled.form`
       font-size: 14px;
     }
   }
+  &::after {
+  content:'';
+  position:absolute;
+  bottom:0;
+  left:0;
+  right:0;
+  background:#171717;
+  height:0.7px;
+}
 `
