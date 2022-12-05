@@ -80,7 +80,7 @@ export default function AnswerBox({ data, index }) {
             <input type='button' className='replace_btn' onClick={handleInputButton} />
             <input type='file' accept='image/png, image/jpeg' id='file' name='file' ref={ref} onChange={e => onFileChanged(e)} />
             <div className="keyword_icon">{data.keyword_icon}</div>
-            <MainContWrap>
+            <MainContWrap className="photo_type_cont_wrap">
               <h2 className="title">{data.keyword}</h2>
               {attach !== '' ? <span>사진 다시선택</span> : <span>사진업로드</span>}
             </MainContWrap>
@@ -96,7 +96,6 @@ width: 100%;
 border-radius: 15px;
 box-shadow: 0 2px 9px 0 rgba(0, 0, 0, 0.15);
 padding: 20px 11px;
-margin-bottom: 7px;
 background: #fff;
 overflow: hidden;
 > .close_icon {
@@ -112,12 +111,8 @@ overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-right: 7px;
   width: calc(100% / 2 - 25.5px);
   aspect-ratio: 1 / 1;
-  &:last-child{
-    margin-right: unset;
-  }
 }
 .bg_img {
   position: absolute;
@@ -187,9 +182,14 @@ display: inline-block;
 padding: 3px;
 align-items: center;
 position: relative;
-background: rgba(0, 0, 0, 0.3);
+background: none;
+border-radius: 5px;
+color: #000;
+&.photo_type_cont_wrap {
+  background: rgba(0, 0, 0, 0.3);
 border-radius: 5px;
 color: #fff;
+}
  > textarea {
   width: 100%;
   border: none;

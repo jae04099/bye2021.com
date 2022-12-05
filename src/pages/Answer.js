@@ -131,6 +131,6 @@ const KeywordContainer = styled.section`
 const AnswerWrap = styled.div`
   display: flex;
   flex-wrap: wrap;
-
+  gap: 7px;
   margin-bottom: 40px;
 `;
