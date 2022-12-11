@@ -1,4 +1,4 @@
-import { createElement, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { AnswerBlock } from "../components/Result/AnswerBlock";
 import tinycolor from "tinycolor2";
