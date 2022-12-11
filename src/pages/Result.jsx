@@ -173,4 +173,9 @@ const ResultButton = styled.button`
   border-radius: 15px;
   color: #ffffff;
   font-size: 14px;
+
+  &:hover {
+    background: #ffffff;
+    color: #000;
+  }
 `;
