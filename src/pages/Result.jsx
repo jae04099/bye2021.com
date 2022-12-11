@@ -109,11 +109,14 @@ export default Result;
 
 const Container = styled.div`
   min-height: 100vh;
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 16px;
   background-color: #000000;
 `;
 
 const Nav = styled.nav`
-  padding: 87px 20px 16px;
+  padding: 87px 0 16px;
   display: flex;
   justify-content: space-between;
   align-items: center;
