@@ -1,13 +1,12 @@
 import React from "react"
-import { Link } from "react-router-dom"
 import styled from "styled-components"
 
-export default function Button({ toLink, children, onClick = undefined }) {
+export default function Button({ children, onClick }) {
   return (
     <Container>
-      <StyledLink onClick={onClick} to={toLink}>
+      <button onClick={onClick}>
         {children}
-      </StyledLink>
+      </button>
     </Container>
   )
 }
@@ -17,10 +16,8 @@ const Container = styled.div`
   display: flex;
   justify-content: center;
   margin-bottom: 48px;
-`
-
-const StyledLink = styled(Link)`
-  width: 100%;
+  > button {
+    width: 100%;
   height: 48px;
   font-size: 14px;
   color: white;
@@ -28,4 +25,5 @@ const StyledLink = styled(Link)`
   border-radius: 15px;
   text-align: center;
   line-height: 48px;
+  }
 `

@@ -2,10 +2,22 @@ import React from "react";
 import styled from "styled-components";
 import FormName from "./components/Main/FormName";
 import Button from "./components/Common/Button";
+import { useStore } from "./store";
+
 import Container from "./components/Common/Container";
 import { primary700 } from "./constant/color";
+import { useNavigate } from "react-router-dom";
 
 export default function App() {
+  const { name, setName } = useStore();
+  let navigate = useNavigate();
+  const handleStart = (ev) => {
+    if(name !== ''){
+      navigate('/answer');
+    }else{
+      alert('이름을 입력해주세요!');
+    }
+  }
   return (
     <Container>
       <Header>
@@ -19,7 +31,7 @@ export default function App() {
       <Wrapper>
         <BookImage src="/image/favorite-book.png" alt="" />
         <FormName />
-        <Button toLink={"/answer"} children={"2022 정리하기"} />
+        <Button children={"2022 정리하기"} onClick={ev => handleStart(ev)} />
       </Wrapper>
     </Container>
   );

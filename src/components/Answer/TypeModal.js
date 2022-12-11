@@ -65,7 +65,7 @@ const Container = styled.div`
   justify-content: center;
 `
 const Dimmed = styled.div`
-position: absolute;
+position: fixed;
 top: 0;
 left: 0;
 display: flex;
@@ -74,6 +74,7 @@ justify-content: center;
 background: rgba(0, 0, 0, 0.25);
 width: 100%;
 height: 100vh;
+z-index: 1;
 `
 const ModalWrap = styled.div`
 position: relative;
@@ -83,7 +84,6 @@ padding: 42px 45px 30px;
 border-radius: 15px;
 width: fit-content;
 height: fit-content;
-z-index: 1;
 > button {
     position: absolute;
     top: 10px;
@@ -102,12 +102,13 @@ justify-content: center;
     margin-bottom: 48px;
 }
 > button {
-max-width: 160px;
+max-width: 250px;
 width: 100%;
 background: #4f4f4f;
 border-radius: 15px;
 color: #fff;
-padding: 10px 0;
+padding: 15px 0;
+font-size: 12px;
 }
 `
 const ContWrap = styled.div`

@@ -12,7 +12,7 @@ export const AnswerImage = ({ data }) => {
 const Container = styled.div`
   padding: 10px 11px;
   background: url(${({ bgImage }) => bgImage}) center center no-repeat
-    rgba(0, 0, 0, 0.4);
+    rgba(0, 0, 0, 0);
   background-size: cover;
   background-blend-mode: multiply;
   border-radius: 15px;
@@ -20,6 +20,9 @@ const Container = styled.div`
 `;
 
 const Title = styled.span`
+background: rgba(0, 0, 0, 0.4);
+padding: 3px;
+border-radius: 5px;
   margin: 0;
   font-weight: 700;
 `;

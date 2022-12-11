@@ -3,6 +3,7 @@ import styled from "styled-components";
 import TypeModal from "../components/Answer/TypeModal";
 import AnswerBox from "../components/Answer/AnswerBox";
 import Button from "../components/Common/Button";
+import Container from "../components/Common/Container";
 import { QuestionData } from "../data";
 import { useRecoilState } from "recoil";
 import { clickedKeywordState, isShowState, finDataListState } from "../atom";
@@ -14,7 +15,7 @@ export default function Answer() {
   const [, setClickedKeyword] = useRecoilState(clickedKeywordState);
   const [finDataList] = useRecoilState(finDataListState);
 
-  useEffect(() => {}, [finDataList]);
+  useEffect(() => { }, [finDataList]);
 
   const handleActiveBadge = (e, idx) => {
     if (finDataList.length === 5) {
@@ -33,24 +34,27 @@ export default function Answer() {
   const checkIsContEmpty = () => {
     let tmpPicType = finDataList.filter((item) => item.content === "pic");
     let tmpNoPicType = finDataList.filter((item) => item.content === "no_pic");
-    if (
+    if (finDataList.length === 0 || finDataList.length <= 4) {
+      alert("키워드를 선택 해 주세요!");
+      return;
+    }
+    else if (
       tmpPicType.some((item) => item.pic_url === "") ||
       tmpNoPicType.some((item) => item.content === "")
     ) {
       alert("모든 칸을 채워주세요!");
       return;
     }
-    if (finDataList[0].length === 0 || finDataList.length <= 4) {
-      alert("키워드를 선택 해 주세요!");
-      return;
-    }
+    
     navigate("/result");
     return;
   };
   return (
     <Container>
-      <h1>키워드를 5개 선택해주세요</h1>
-      <h5>2022년의 단어는 무엇인가요?</h5>
+      <TitleContainer>
+        <h1>키워드를 5개 선택해주세요</h1>
+        <h5>2022년의 단어는 무엇인가요?</h5>
+      </TitleContainer>
       <KeywordContainer>
         {QuestionData.map((item, index) => {
           return (
@@ -74,27 +78,17 @@ export default function Answer() {
           return <AnswerBox key={`${index}`} data={e} index={index} />;
         })}
       </AnswerWrap>
-      <button onClick={checkIsContEmpty}>다음</button>
-      {/* <Button
-        toLink={checkIsContEmpty}
+      {/* <button onClick={checkIsContEmpty}>다음</button> */}
+      <Button
         onClick={checkIsContEmpty}
         children={"다음"}
-      /> */}
+      />
       {isShow && <TypeModal />}
     </Container>
   );
 }
-
-const Container = styled.section`
-  position: relative;
-  max-width: 500px;
-  width: calc(100% - 40px);
-  height: 100%;
-  min-height: calc(100vh - 88px);
-  margin: 0 auto;
-  padding: 88px 20px 0;
-  background: #e9e9e9;
-  h1 {
+const TitleContainer = styled.div`
+> h1 {
     font-size: 20px;
     margin-bottom: 6px;
     font-weight: 400;
@@ -103,7 +97,7 @@ const Container = styled.section`
     font-size: 14px;
     color: #444;
   }
-`;
+`
 
 const KeywordContainer = styled.section`
   display: flex;

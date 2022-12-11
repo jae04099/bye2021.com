@@ -4,7 +4,6 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { RecoilRoot } from "recoil";
 import App from "./App";
 import Answer from "./pages/Answer";
-import Question from "./pages/Question";
 import Result from "./pages/Result";
 import "./reset.css";
 import "/node_modules/react-grid-layout/css/styles.css";
@@ -16,7 +15,6 @@ ReactDOM.render(
       <Routes>
         <Route path="/" element={<App />} />
         <Route path="answer" element={<Answer />} />
-        <Route path="question" element={<Question />} />
         <Route path="result" element={<Result />} />
       </Routes>
     </RecoilRoot>
