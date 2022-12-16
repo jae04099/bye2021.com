@@ -36,8 +36,8 @@ export default function Answer() {
   }, [isShow]);
 
   const checkIsContEmpty = () => {
-    let tmpPicType = finDataList.filter((item) => item.content === "pic");
-    let tmpNoPicType = finDataList.filter((item) => item.content === "no_pic");
+    let tmpPicType = finDataList.filter((item) => item.type === "pic");
+    let tmpNoPicType = finDataList.filter((item) => item.type === "no_pic");
     if (
       tmpPicType.some((item) => item.pic_url === "") ||
       tmpNoPicType.some((item) => item.content === "")
