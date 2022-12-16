@@ -70,6 +70,12 @@ const Result = () => {
     });
   };
 
+  const copyUrl = () => {
+    window.navigator.clipboard.writeText("https://loglog.co.kr").then(() => {
+      alert("링크가 복사되었습니다! 친구에게 공유해보세요 :)");
+    });
+  };
+
   return (
     <Container>
       <Nav>
@@ -112,7 +118,9 @@ const Result = () => {
         <ResultButton type="button" onClick={captureResult}>
           이미지로 저장하기
         </ResultButton>
-        <ResultButton>링크 복사</ResultButton>
+        <ResultButton type="button" onClick={copyUrl}>
+          링크 복사
+        </ResultButton>
       </ButtonContainer>
     </Container>
   );
