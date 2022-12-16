@@ -34,6 +34,19 @@ const Result = () => {
 
   useEffect(() => {
     masonryLayout();
+
+    const myImgs = document.querySelectorAll(".my-images");
+
+    myImgs.forEach((myImg) => {
+      const imgWidth = myImg.clientWidth;
+      const imgHeight = myImg.clientHeight;
+
+      if (imgWidth > imgHeight) {
+        myImg.style.height = "100%";
+      } else {
+        myImg.style.width = "100%";
+      }
+    });
   }, []);
 
   const getRandomColor = (index) => {
