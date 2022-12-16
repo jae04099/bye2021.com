@@ -16,12 +16,10 @@ export default function Answer() {
   const handleActiveBadge = (e, idx) => {
     if (finDataList.length === 5) {
       alert("이미 5개를 선택 하셨습니다.");
-    } else if (
-      finDataList.filter((item) => item.full_keyword === e.target.value)
-        .length === 1
-    ) {
-      return null;
-    } else {
+      return;
+    }
+
+    if (!finDataList.find((item) => item.full_keyword === e.target.value)) {
       setShow(true);
       setClickedKeyword(e.target.value);
     }
