@@ -1,9 +1,10 @@
 import React from "react";
 import { useRecoilState } from "recoil";
 import styled from "styled-components";
+import { nameState } from "../../atom";
 
 export default function FormName() {
-  const [name, setName] = useRecoilState("nameState");
+  const [name, setName] = useRecoilState(nameState);
   return (
     <>
       <NameForm onClick={(e) => e.preventDefault(e)}>
