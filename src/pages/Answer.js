@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import styled from "styled-components";
 import TypeModal from "../components/Answer/TypeModal";
 import AnswerBox from "../components/Answer/AnswerBox";
-import Button from "../components/Common/Button";
 import { QuestionData } from "../data";
 import { useRecoilState } from "recoil";
 import { clickedKeywordState, isShowState, finDataListState } from "../atom";
@@ -14,25 +13,29 @@ export default function Answer() {
   const [, setClickedKeyword] = useRecoilState(clickedKeywordState);
   const [finDataList] = useRecoilState(finDataListState);
 
-  useEffect(() => {}, [finDataList]);
-
   const handleActiveBadge = (e, idx) => {
     if (finDataList.length === 5) {
       alert("이미 5개를 선택 하셨습니다.");
-    } else if (
-      finDataList.filter((item) => item.full_keyword === e.target.value)
-        .length === 1
-    ) {
-      return null;
-    } else {
+      return;
+    }
+
+    if (!finDataList.find((item) => item.full_keyword === e.target.value)) {
       setShow(true);
       setClickedKeyword(e.target.value);
     }
   };
 
+  useEffect(() => {
+    if (isShow) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "unset";
+    }
+  }, [isShow]);
+
   const checkIsContEmpty = () => {
-    let tmpPicType = finDataList.filter((item) => item.content === "pic");
-    let tmpNoPicType = finDataList.filter((item) => item.content === "no_pic");
+    let tmpPicType = finDataList.filter((item) => item.type === "pic");
+    let tmpNoPicType = finDataList.filter((item) => item.type === "no_pic");
     if (
       tmpPicType.some((item) => item.pic_url === "") ||
       tmpNoPicType.some((item) => item.content === "")
@@ -74,7 +77,7 @@ export default function Answer() {
           return <AnswerBox key={`${index}`} data={e} index={index} />;
         })}
       </AnswerWrap>
-      <button onClick={checkIsContEmpty}>다음</button>
+      <NextButton onClick={checkIsContEmpty}>다음</NextButton>
       {/* <Button
         toLink={checkIsContEmpty}
         onClick={checkIsContEmpty}
@@ -92,7 +95,7 @@ const Container = styled.section`
   height: 100%;
   min-height: calc(100vh - 88px);
   margin: 0 auto;
-  padding: 88px 20px 0;
+  padding: 88px 20px 30px;
   background: #e9e9e9;
   h1 {
     font-size: 20px;
@@ -133,4 +136,14 @@ const AnswerWrap = styled.div`
   flex-wrap: wrap;
   gap: 7px;
   margin-bottom: 40px;
+`;
+
+const NextButton = styled.button`
+  display: inline-block;
+  width: 100%;
+  height: 48px;
+  font-size: 14px;
+  border-radius: 15px;
+  background-color: #454545;
+  color: white;
 `;

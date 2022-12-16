@@ -1,25 +1,22 @@
 import React from "react";
-import { useState, useRef } from "react";
+import { useRef } from "react";
 import styled from "styled-components";
 import { useRecoilState } from "recoil";
 import { finDataListState } from "../../atom";
 
 export default function AnswerBox({ data, index }) {
-  const [desc, setDesc] = useState(data.content);
-  const [attach, setAttach] = useState(data.pic_url);
+  const { content, pic_url, keyword, full_keyword } = data;
   const [finDataList, setFinDataList] = useRecoilState(finDataListState);
   const ref = useRef();
 
   const handleInputButton = () => {
     ref.current && ref.current.click();
   };
-  const handleDesc = (e) => {
-    setDesc(e.slice(0, 150));
-  };
-  const handleSaveDesc = () => {
+
+  const handleSaveDesc = (text) => {
     const newState = finDataList.map((obj, idx) => {
-      if (obj.keyword === data.keyword) {
-        return { ...obj, content: desc };
+      if (obj.keyword === keyword) {
+        return { ...obj, content: text };
       }
       return obj;
     });
@@ -34,13 +31,14 @@ export default function AnswerBox({ data, index }) {
     });
     setFinDataList(newState);
   };
+
   // alert 줘야하나 삭제해도 된다고?
-  const handleCloseBox = (e) => {
-    e.preventDefault();
-    setFinDataList(
-      finDataList.filter((item) => item.full_keyword !== data.full_keyword),
-    );
+  const handleCloseBox = () => {
+    setFinDataList([
+      ...finDataList.filter((item) => item.full_keyword !== full_keyword),
+    ]);
   };
+
   const onFileChanged = (ev) => {
     const {
       target: { files },
@@ -53,7 +51,6 @@ export default function AnswerBox({ data, index }) {
           if (!event.target) return;
           const { result } = event.target;
           if (result) {
-            setAttach(result);
             handleSaveImg(result);
           }
         });
@@ -67,24 +64,25 @@ export default function AnswerBox({ data, index }) {
     <>
       {data.type === "no_pic" ? (
         <AnswerPiece>
-          <img
-            className="close_icon"
-            onClick={(e) => handleCloseBox(e)}
-            src="/image/close.png"
-            alt="close button"
-          />
+          <CloseButton type="button" onClick={handleCloseBox}>
+            <img
+              className="close_icon"
+              src="/image/close.png"
+              alt="close button"
+            />
+          </CloseButton>
           <PieceInnerWrap>
             <div className="keyword_icon">{data.keyword_icon}</div>
-            <span className="char_cnt">{`${desc.length}/150`}</span>
+            <span className="char_cnt">{`${content.length}/150`}</span>
             <MainContWrap>
               <h2 className="title">{data.keyword}</h2>
               <textarea
                 id="story"
                 name="story"
                 placeholder="내용을 입력해주세요"
-                value={desc}
-                onChange={(e) => handleDesc(e.target.value)}
-                onBlur={handleSaveDesc}
+                value={content}
+                onChange={(e) => handleSaveDesc(e.target.value)}
+                // onBlur={(e) => handleSaveDesc(e.target.value)}
                 rows="5"
                 cols="33"
               ></textarea>
@@ -93,14 +91,11 @@ export default function AnswerBox({ data, index }) {
         </AnswerPiece>
       ) : (
         <AnswerPiece className="photo_type">
-          <img
-            className="close_icon"
-            onClick={(e) => handleCloseBox(e)}
-            src="/image/close.png"
-            alt="close button"
-          />
-          {attach !== "" && (
-            <img className="bg_img" src={attach} alt="background img" />
+          <CloseButton type="button" onClick={handleCloseBox}>
+            <img src="/image/close.png" alt="close button" />
+          </CloseButton>
+          {data.pic_url && (
+            <img className="bg_img" src={data.pic_url} alt="background img" />
           )}
           <PieceInnerWrap className="photo_type_inner_wrap">
             <input
@@ -119,13 +114,13 @@ export default function AnswerBox({ data, index }) {
             <div className="keyword_icon">{data.keyword_icon}</div>
             <MainContWrap className="photo_type_cont_wrap">
               <h2 className="title">{data.keyword}</h2>
-              {attach !== "" ? (
+              {pic_url !== "" ? (
                 <span>사진 다시선택</span>
               ) : (
                 <span>사진업로드</span>
               )}
             </MainContWrap>
-          </PieceInnerWrap>{" "}
+          </PieceInnerWrap>
         </AnswerPiece>
       )}
     </>
@@ -140,15 +135,7 @@ const AnswerPiece = styled.div`
   padding: 20px 11px;
   background: #fff;
   overflow: hidden;
-  > .close_icon {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    width: 10px;
-    height: 10px;
-    cursor: pointer;
-    z-index: 1;
-  }
+
   &.photo_type {
     display: flex;
     align-items: center;
@@ -240,5 +227,20 @@ const MainContWrap = styled.div`
     &:focus {
       outline: none;
     }
+  }
+`;
+
+const CloseButton = styled.button`
+  border: none;
+  background: transparent;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+  z-index: 1;
+
+  & > img {
+    width: 10px;
+    height: 10px;
   }
 `;
