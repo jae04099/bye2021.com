@@ -1,40 +1,17 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
-import { AnswerBlock } from "../components/Result/AnswerBlock";
 import tinycolor from "tinycolor2";
-import { useRecoilState } from "recoil";
-import { finDataListState } from "../atom";
-import { AnswerImage } from "../components/Result/AnswerImage";
 import html2canvas from "html2canvas";
+import { MasonryGrid } from "../components/Result/MasonryGrid";
+import { useRecoilState } from "recoil";
+import { finDataListState, nameState } from "../atom";
 
 const Result = () => {
   const [pointColor, setPointColor] = useState(null);
   const [finDataList] = useRecoilState(finDataListState);
-
-  function masonryLayout() {
-    const container = document.querySelector(".masonry-container");
-    const masonryContainerStyle = getComputedStyle(container);
-
-    const autoRows = parseInt(
-      masonryContainerStyle.getPropertyValue("grid-auto-rows"),
-    );
-
-    document.querySelectorAll(".masonry-item").forEach((elt) => {
-      const scrollHeight = elt.scrollHeight;
-
-      elt.style.gridRowEnd = `span ${Math.ceil(scrollHeight / autoRows / 1.4)}`;
-    });
-
-    document.querySelectorAll(".masonry-item-image").forEach((elt) => {
-      const imgWidth = container.scrollWidth / 2 - 10;
-
-      elt.style.gridRowEnd = `span ${Math.ceil(imgWidth / autoRows / 2)}`;
-    });
-  }
+  const [name] = useRecoilState(nameState);
 
   useEffect(() => {
-    masonryLayout();
-
     const myImgs = document.querySelectorAll(".my-images");
 
     myImgs.forEach((myImg) => {
@@ -48,16 +25,6 @@ const Result = () => {
       }
     });
   }, []);
-
-  const getRandomColor = (index) => {
-    if (index === 0) return pointColor;
-    const randomValue = Math.floor(Math.random() * 10);
-    const bgColor = Math.floor(Math.random() * 1)
-      ? tinycolor(pointColor || "#ffffff").darken(randomValue * 10)
-      : tinycolor(pointColor || "#ffffff").brighten(randomValue * 10);
-
-    return bgColor;
-  };
 
   const captureResult = () => {
     html2canvas(document.getElementById("capture"), {
@@ -78,42 +45,34 @@ const Result = () => {
 
   return (
     <Container>
-      <Nav>
-        <div>
-          <ColorLabel htmlFor="color">
-            <span>🎨</span> <ColorSet bgcolor={pointColor}></ColorSet>
-          </ColorLabel>
-          <ColorInput
-            id="color"
-            type="color"
-            onChange={(e) => setPointColor(e.target.value)}
-          />
-        </div>
-        <div>
-          <RandomButton
-            type="button"
-            onClick={() => setPointColor(tinycolor.random().toHexString())}
-          >
-            🎲
-          </RandomButton>
-        </div>
-      </Nav>
-      <GridContainer id="capture" className="masonry-container">
-        {finDataList.map((data, index) => {
-          const { content, keyword } = data;
-
-          if (content)
-            return (
-              <AnswerBlock
-                key={keyword}
-                data={data}
-                data-type="text"
-                bgColor={getRandomColor(index)}
-              />
-            );
-          return <AnswerImage key={keyword} data={data} data-type="image" />;
-        })}
-      </GridContainer>
+      <CaptureContainer id="capture">
+        <Title>
+          <Name fontColor={pointColor}>{name}</Name>의
+          <br />
+          2022년 순간들
+        </Title>
+        <Nav>
+          <div>
+            <ColorLabel htmlFor="color">
+              <span>🎨</span> <ColorSet bgcolor={pointColor}></ColorSet>
+            </ColorLabel>
+            <ColorInput
+              id="color"
+              type="color"
+              onChange={(e) => setPointColor(e.target.value)}
+            />
+          </div>
+          <div>
+            <RandomButton
+              type="button"
+              onClick={() => setPointColor(tinycolor.random().toHexString())}
+            >
+              🎲
+            </RandomButton>
+          </div>
+        </Nav>
+        <MasonryGrid datas={finDataList} pointColor={pointColor} />
+      </CaptureContainer>
       <ButtonContainer>
         <ResultButton type="button" onClick={captureResult}>
           이미지로 저장하기
@@ -129,32 +88,32 @@ const Result = () => {
 export default Result;
 
 const Container = styled.div`
+  box-sizing: border-box;
   min-height: 100vh;
   max-width: 500px;
   margin: 0 auto;
-  padding: 16px;
+  padding: 41px 0 16px;
   background-color: #000000;
 `;
 
+const CaptureContainer = styled.div`
+  padding: 30px 16px;
+`;
+
+const Title = styled.h1`
+  color: white;
+  font-size: 24px;
+`;
+
+const Name = styled.span`
+  color: ${({ fontColor }) => fontColor || "#ffffff"};
+`;
+
 const Nav = styled.nav`
-  padding: 87px 0 16px;
+  padding: 16px 0;
   display: flex;
   justify-content: space-between;
   align-items: center;
-`;
-
-const GridContainer = styled.div`
-  display: grid;
-  /* padding: 20px; */
-  box-sizing: border-box;
-  width: 100%;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 5px;
-  grid-auto-rows: 5px;
-
-  & div[data-type="text"]:first-of-type {
-    grid-column: 1/3;
-  }
 `;
 
 const ColorLabel = styled.label`
@@ -180,8 +139,8 @@ const RandomButton = styled.button`
 
 const ButtonContainer = styled.div`
   display: grid;
+  padding: 0 16px;
   grid-template-columns: repeat(2, 1fr);
-  margin-top: 30px;
   gap: 10px;
 `;
 

@@ -1,9 +1,10 @@
-import React from "react"
-import { useStore } from "../../store"
-import styled from "styled-components"
+import React from "react";
+import { useRecoilState } from "recoil";
+import styled from "styled-components";
+import { nameState } from "../../atom";
 
 export default function FormName() {
-  const { name, setName } = useStore()
+  const [name, setName] = useRecoilState(nameState);
   return (
     <>
       <NameForm onClick={(e) => e.preventDefault(e)}>
@@ -15,11 +16,11 @@ export default function FormName() {
         />
       </NameForm>
     </>
-  )
+  );
 }
 
 const NameForm = styled.form`
-position: relative;
+  position: relative;
   margin: 20px 0 52px;
   label,
   input {
@@ -47,12 +48,12 @@ position: relative;
     }
   }
   &::after {
-  content:'';
-  position:absolute;
-  bottom:0;
-  left:0;
-  right:0;
-  background:#171717;
-  height:0.7px;
-}
-`
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: #171717;
+    height: 0.7px;
+  }
+`;
