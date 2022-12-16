@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import styled from "styled-components";
 import TypeModal from "../components/Answer/TypeModal";
 import AnswerBox from "../components/Answer/AnswerBox";
-import Button from "../components/Common/Button";
 import { QuestionData } from "../data";
 import { useRecoilState } from "recoil";
 import { clickedKeywordState, isShowState, finDataListState } from "../atom";
@@ -13,8 +12,6 @@ export default function Answer() {
   const [isShow, setShow] = useRecoilState(isShowState);
   const [, setClickedKeyword] = useRecoilState(clickedKeywordState);
   const [finDataList] = useRecoilState(finDataListState);
-
-  useEffect(() => {}, [finDataList]);
 
   const handleActiveBadge = (e, idx) => {
     if (finDataList.length === 5) {
@@ -74,7 +71,7 @@ export default function Answer() {
           return <AnswerBox key={`${index}`} data={e} index={index} />;
         })}
       </AnswerWrap>
-      <button onClick={checkIsContEmpty}>다음</button>
+      <NextButton onClick={checkIsContEmpty}>다음</NextButton>
       {/* <Button
         toLink={checkIsContEmpty}
         onClick={checkIsContEmpty}
@@ -133,4 +130,14 @@ const AnswerWrap = styled.div`
   flex-wrap: wrap;
   gap: 7px;
   margin-bottom: 40px;
+`;
+
+const NextButton = styled.button`
+  display: inline-block;
+  width: 100%;
+  height: 48px;
+  font-size: 14px;
+  border-radius: 15px;
+  background-color: #454545;
+  color: white;
 `;
