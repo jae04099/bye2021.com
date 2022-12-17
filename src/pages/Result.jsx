@@ -15,6 +15,9 @@ const Result = () => {
 
   useEffect(() => {
     if (finDataList.length === 0) navigate("/");
+
+    window.scrollTo(0, 0);
+
     const myImgs = document.querySelectorAll(".my-images");
 
     myImgs.forEach((myImg) => {

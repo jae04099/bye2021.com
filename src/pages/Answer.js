@@ -52,7 +52,7 @@ export default function Answer() {
       return;
     }
     if (finDataList[0].length === 0 || finDataList.length <= 4) {
-      alert("키워드를 선택 해 주세요!");
+      alert("키워드를 선택해주세요!");
       return;
     }
     navigate("/result");
