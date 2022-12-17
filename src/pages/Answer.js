@@ -86,11 +86,6 @@ export default function Answer() {
         })}
       </AnswerWrap>
       <NextButton onClick={checkIsContEmpty}>다음</NextButton>
-      {/* <Button
-        toLink={checkIsContEmpty}
-        onClick={checkIsContEmpty}
-        children={"다음"}
-      /> */}
       {isShow && <TypeModal />}
     </Container>
   );
