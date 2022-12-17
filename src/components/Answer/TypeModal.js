@@ -15,7 +15,6 @@ export default function TypeModal() {
   const splitedKeywordList = clickedKeyword.split(" ");
   const handleSubmitType = () => {
     setFinDataList((prev) => [
-      ...prev,
       {
         full_keyword: clickedKeyword,
         keyword: splitedKeywordList[0],
@@ -25,6 +24,7 @@ export default function TypeModal() {
         pic_url: "",
         writable: true,
       },
+      ...prev,
     ]);
     setShow(false);
   };
