@@ -9,7 +9,7 @@ export const masonryLayout = () => {
   document.querySelectorAll(".masonry-item").forEach((elt) => {
     const scrollHeight = elt.scrollHeight;
 
-    elt.style.gridRowEnd = `span ${Math.ceil(scrollHeight / autoRows / 1.4)}`;
+    elt.style.gridRowEnd = `span ${Math.ceil(scrollHeight / autoRows / 1.7)}`;
   });
 
   document.querySelectorAll(".masonry-item-image").forEach((elt) => {
