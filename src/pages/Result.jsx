@@ -34,7 +34,7 @@ const Result = () => {
       backgroundColor: "#000000",
     }).then(function (canvas) {
       const downloadLink = document.createElement("a");
-      downloadLink.download = "filename.png";
+      downloadLink.download = `${name}_s_memory.png`;
       downloadLink.href = canvas.toDataURL();
       downloadLink.click();
     });
