@@ -18,7 +18,6 @@ export default function App() {
       </Description>
       <Wrapper>
         <BookImage src="/image/favorite-book.png" alt="" />
-        {/* TODO: 인풋 수정  */}
         <FormName />
         <Button toLink={"/answer"} children={"2022 정리하기"} />
       </Wrapper>

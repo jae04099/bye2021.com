@@ -45,6 +45,9 @@ const Result = () => {
 
   return (
     <Container>
+      <head>
+        <meta name="theme-color" content="#000000" />
+      </head>
       <CaptureContainer id="capture">
         <Title>
           <Name fontColor={pointColor}>{name}</Name>의

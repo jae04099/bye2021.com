@@ -95,7 +95,7 @@ const Container = styled.section`
   height: 100%;
   min-height: calc(100vh - 88px);
   margin: 0 auto;
-  padding: 88px 20px 30px;
+  padding: 50px 20px 30px;
   background: #e9e9e9;
   h1 {
     font-size: 20px;
