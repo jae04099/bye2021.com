@@ -4,7 +4,12 @@ import TypeModal from "../components/Answer/TypeModal";
 import AnswerBox from "../components/Answer/AnswerBox";
 import { QuestionData } from "../data";
 import { useRecoilState } from "recoil";
-import { clickedKeywordState, isShowState, finDataListState } from "../atom";
+import {
+  clickedKeywordState,
+  isShowState,
+  finDataListState,
+  nameState,
+} from "../atom";
 import { useNavigate } from "react-router-dom";
 
 export default function Answer() {
@@ -12,6 +17,7 @@ export default function Answer() {
   const [isShow, setShow] = useRecoilState(isShowState);
   const [, setClickedKeyword] = useRecoilState(clickedKeywordState);
   const [finDataList] = useRecoilState(finDataListState);
+  const [name] = useRecoilState(nameState);
 
   const handleActiveBadge = (e, idx) => {
     if (finDataList.length === 5) {
@@ -26,6 +32,8 @@ export default function Answer() {
   };
 
   useEffect(() => {
+    if (!name) navigate("/");
+
     if (isShow) {
       document.body.style.overflow = "hidden";
     } else {

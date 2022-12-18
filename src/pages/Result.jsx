@@ -5,13 +5,16 @@ import html2canvas from "html2canvas";
 import { MasonryGrid } from "../components/Result/MasonryGrid";
 import { useRecoilState } from "recoil";
 import { finDataListState, nameState } from "../atom";
+import { useNavigate } from "react-router-dom";
 
 const Result = () => {
+  const navigate = useNavigate();
   const [pointColor, setPointColor] = useState(null);
   const [finDataList] = useRecoilState(finDataListState);
   const [name] = useRecoilState(nameState);
 
   useEffect(() => {
+    if (finDataList.length === 0) navigate("/");
     const myImgs = document.querySelectorAll(".my-images");
 
     myImgs.forEach((myImg) => {
