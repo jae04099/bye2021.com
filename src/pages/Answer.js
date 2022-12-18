@@ -20,8 +20,8 @@ export default function Answer() {
   const [name] = useRecoilState(nameState);
 
   const handleActiveBadge = (e, idx) => {
-    if (finDataList.length === 5) {
-      alert("이미 5개를 선택 하셨습니다.");
+    if (finDataList.length === 6) {
+      alert("이미 6개를 선택 하셨습니다.");
       return;
     }
 
@@ -33,7 +33,6 @@ export default function Answer() {
 
   useEffect(() => {
     if (!name) navigate("/");
-
     if (isShow) {
       document.body.style.overflow = "hidden";
     } else {
@@ -60,7 +59,7 @@ export default function Answer() {
   };
   return (
     <Container>
-      <h1>키워드를 5개 선택해주세요</h1>
+      <h1>키워드를 6개 선택해주세요</h1>
       <h5>2022년의 단어는 무엇인가요?</h5>
       <KeywordContainer>
         {QuestionData.map((item, index) => {
