@@ -51,7 +51,7 @@ export default function Answer() {
       return;
     }
     if (finDataList[0].length === 0 || finDataList.length <= 4) {
-      alert("키워드를 선택 해 주세요!");
+      alert("키워드를 선택해주세요!");
       return;
     }
     navigate("/result");
@@ -85,11 +85,6 @@ export default function Answer() {
         })}
       </AnswerWrap>
       <NextButton onClick={checkIsContEmpty}>다음</NextButton>
-      {/* <Button
-        toLink={checkIsContEmpty}
-        onClick={checkIsContEmpty}
-        children={"다음"}
-      /> */}
       {isShow && <TypeModal />}
     </Container>
   );

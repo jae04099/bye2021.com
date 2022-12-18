@@ -15,6 +15,7 @@ export default function AnswerBox({ data, index }) {
 
   const handleSaveDesc = (text) => {
     const newState = finDataList.map((obj, idx) => {
+      if (text.length > 150) text = text.slice(0, 150);
       if (obj.keyword === keyword) {
         return { ...obj, content: text };
       }
@@ -22,6 +23,7 @@ export default function AnswerBox({ data, index }) {
     });
     setFinDataList(newState);
   };
+
   const handleSaveImg = (props) => {
     const newState = finDataList.map((obj, idx) => {
       if (obj.keyword === data.keyword) {
@@ -112,14 +114,14 @@ export default function AnswerBox({ data, index }) {
               onChange={(e) => onFileChanged(e)}
             />
             <div className="keyword_icon">{data.keyword_icon}</div>
-            <MainContWrap className="photo_type_cont_wrap">
+            <PhotoWrap className="photo_type_cont_wrap">
               <h2 className="title">{data.keyword}</h2>
               {pic_url !== "" ? (
                 <span>사진 다시선택</span>
               ) : (
                 <span>사진업로드</span>
               )}
-            </MainContWrap>
+            </PhotoWrap>
           </PieceInnerWrap>
         </AnswerPiece>
       )}
@@ -209,16 +211,12 @@ const PieceInnerWrap = styled.div`
 const MainContWrap = styled.div`
   display: inline-block;
   padding: 3px;
+  width: 100%;
   align-items: center;
   position: relative;
   background: none;
   border-radius: 5px;
   color: #000;
-  &.photo_type_cont_wrap {
-    background: rgba(0, 0, 0, 0.3);
-    border-radius: 5px;
-    color: #fff;
-  }
   > textarea {
     width: 100%;
     border: none;
@@ -228,6 +226,14 @@ const MainContWrap = styled.div`
       outline: none;
     }
   }
+`;
+
+const PhotoWrap = styled.div`
+  display: inline-block;
+  padding: 3px;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 5px;
+  color: #fff;
 `;
 
 const CloseButton = styled.button`
