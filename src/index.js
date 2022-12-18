@@ -12,8 +12,8 @@ ReactDOM.render(
     <RecoilRoot>
       <Routes>
         <Route path="/" element={<App />} />
-        <Route path="answer" element={<Answer />} />
-        <Route path="result" element={<Result />} />
+        <Route path="/answer" element={<Answer />} />
+        <Route path="/result" element={<Result />} />
       </Routes>
     </RecoilRoot>
   </BrowserRouter>,
