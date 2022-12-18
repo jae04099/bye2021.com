@@ -59,7 +59,7 @@ export default function Answer() {
   };
   return (
     <Container>
-      <h1>키워드를 6개 선택해주세요</h1>
+      <Title>키워드를 6개 선택해주세요</Title>
       <h5>2022년의 단어는 무엇인가요?</h5>
       <KeywordContainer>
         {QuestionData.map((item, index) => {
@@ -99,15 +99,16 @@ const Container = styled.section`
   margin: 0 auto;
   padding: 50px 20px 30px;
   background: #e9e9e9;
-  h1 {
-    font-size: 20px;
-    margin-bottom: 6px;
-    font-weight: 400;
-  }
   h5 {
     font-size: 14px;
     color: #444;
   }
+`;
+
+const Title = styled.h1`
+  font-size: 20px;
+  margin-bottom: 6px;
+  font-weight: 600;
 `;
 
 const KeywordContainer = styled.section`

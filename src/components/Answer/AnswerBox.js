@@ -211,6 +211,7 @@ const PieceInnerWrap = styled.div`
 const MainContWrap = styled.div`
   display: inline-block;
   padding: 3px;
+  padding-left: 0;
   width: 100%;
   align-items: center;
   position: relative;

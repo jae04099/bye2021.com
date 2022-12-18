@@ -29,12 +29,12 @@ export default function TypeModal() {
     setShow(false);
   };
   return (
-    <>
-      <Dimmed />
+    <Container>
+      {/* <Dimmed /> */}
       <ModalWrap>
         <button onClick={() => setShow(false)}>닫기</button>
         <ModalInnerWrap>
-          <h1>어떤 형식으로 기록하시겠어요?</h1>
+          <Title>어떤 형식으로 기록하시겠어요?</Title>
           <ContWrap>
             <li>
               <Label htmlFor="photo_type">
@@ -68,21 +68,23 @@ export default function TypeModal() {
           <button onClick={handleSubmitType}>확인</button>
         </ModalInnerWrap>
       </ModalWrap>
-    </>
+    </Container>
   );
 }
 
-const Dimmed = styled.div`
+const Container = styled.div`
+  display: inline-block;
   position: absolute;
   top: 0;
-  bottom: 0;
   left: 0;
   right: 0;
+  height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
   background: rgba(0, 0, 0, 0.25);
 `;
+
 const ModalWrap = styled.div`
   position: absolute;
   top: 50%;
@@ -100,11 +102,6 @@ const ModalWrap = styled.div`
 `;
 const ModalInnerWrap = styled.div`
   text-align: center;
-  > h1 {
-    font-size: 20px;
-    font-weight: 600;
-    margin: 48px 30px;
-  }
   > button {
     max-width: 160px;
     width: 100%;
@@ -114,6 +111,13 @@ const ModalInnerWrap = styled.div`
     padding: 10px 0;
   }
 `;
+
+const Title = styled.h2`
+  font-size: 20px;
+  font-weight: 600;
+  margin: 48px 30px 30px;
+`;
+
 const ContWrap = styled.ul`
   display: flex;
   justify-content: center;
