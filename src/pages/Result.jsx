@@ -10,8 +10,8 @@ import { useNavigate } from "react-router-dom";
 const Result = () => {
   const navigate = useNavigate();
   const [pointColor, setPointColor] = useState(null);
-  const [finDataList] = useRecoilState(finDataListState);
-  const [name] = useRecoilState(nameState);
+  const [finDataList, setFinDataList] = useRecoilState(finDataListState);
+  const [name, setName] = useRecoilState(nameState);
 
   useEffect(() => {
     if (finDataList.length === 0) navigate("/");
@@ -43,10 +43,10 @@ const Result = () => {
     });
   };
 
-  const copyUrl = () => {
-    window.navigator.clipboard.writeText("https://loglog.co.kr").then(() => {
-      alert("링크가 복사되었습니다! 친구에게 공유해보세요 :)");
-    });
+  const returnMain = () => {
+    setFinDataList([]);
+    setName("");
+    navigate("/");
   };
 
   return (
@@ -86,8 +86,8 @@ const Result = () => {
         <ResultButton type="button" onClick={captureResult}>
           이미지로 저장하기
         </ResultButton>
-        <ResultButton type="button" onClick={copyUrl}>
-          링크 복사
+        <ResultButton type="button" onClick={returnMain}>
+          다시 기록하기
         </ResultButton>
       </ButtonContainer>
     </Container>
