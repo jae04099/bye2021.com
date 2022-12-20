@@ -128,6 +128,7 @@ const Nav = styled.nav`
 const ColorLabel = styled.label`
   font-size: 20px;
   margin-right: 6px;
+  cursor: pointer;
 `;
 const ColorInput = styled.input`
   opacity: 0;
