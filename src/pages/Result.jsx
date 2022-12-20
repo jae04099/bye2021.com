@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import tinycolor from "tinycolor2";
 import html2canvas from "html2canvas";
 import { MasonryGrid } from "../components/Result/MasonryGrid";
@@ -14,7 +14,7 @@ const Result = () => {
   const [name, setName] = useRecoilState(nameState);
 
   useEffect(() => {
-    if (finDataList.length === 0) navigate("/");
+    // if (finDataList.length === 0) navigate("/");
 
     window.scrollTo(0, 0);
 
@@ -142,8 +142,30 @@ const ColorSet = styled.div`
     bgcolor || "linear-gradient(270deg, #00ff19 0%, #6d79ec 99.99%)"};
 `;
 
+const rollDice = keyframes`
+  0% {
+    transform: translateY(0) rotate(0deg);
+  }
+  25% {
+    transform: rotate(90deg);
+  }
+  50% {
+    transform: translateY(-100%) rotate(180deg);
+  }
+  75% {
+    transform: rotate(270deg);
+  }
+  100% {
+    transform: translateY(0) rotate(360deg);
+  }
+`;
+
 const RandomButton = styled.button`
   font-size: 20px;
+
+  &:hover {
+    animation: ${rollDice} 1s ease-in-out infinite;
+  }
 `;
 
 const ButtonContainer = styled.div`
