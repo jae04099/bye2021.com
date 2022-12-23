@@ -16,7 +16,7 @@ const Container = styled.div`
   padding: 10px 11px;
   background-color: ${({ bgcolor }) => bgcolor || "#ffffff"};
   border-radius: 15px;
-  word-break: break-all;
+  word-break: break-word;
   color: ${({ bgcolor }) =>
     tinycolor(bgcolor || "#ffffff").isDark() ? "#ffffff" : "#000000"};
 `;
