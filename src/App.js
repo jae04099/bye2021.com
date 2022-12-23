@@ -8,9 +8,10 @@ import { primary700 } from "./constant/color";
 export default function App() {
   return (
     <Container>
-      <Header>
-        안녕<span>2022</span>
-      </Header>
+      <TopTitle>
+        <h1>안녕<span>2022</span></h1>
+        <a href="https://github.com/jae04099/loglog.co.kr" target="_blank" rel="noreferrer noopener">🤙</a>
+      </TopTitle>
       <Description>
         <Strong>키워드</Strong>와 <Strong>색</Strong>으로
         <br />
@@ -25,7 +26,11 @@ export default function App() {
   );
 }
 
-const Header = styled.h1`
+const TopTitle = styled.div`
+display: flex;
+justify-content: space-between;
+align-items: center;
+> h1 {
   font-size: 36px;
   font-weight: 600;
   color: ${primary700};
@@ -33,6 +38,11 @@ const Header = styled.h1`
     font-style: normal;
     color: #939393;
   }
+}
+
+> a {
+  font-size: 24px;
+}
 `;
 
 const Description = styled.p`
