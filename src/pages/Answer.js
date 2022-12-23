@@ -50,7 +50,7 @@ export default function Answer() {
       alert("모든 칸을 채워주세요!");
       return;
     }
-    if (finDataList[0].length === 0 || finDataList.length <= 4) {
+    if (finDataList[0].length === 0 || finDataList.length <= 5) {
       alert("키워드를 선택해주세요!");
       return;
     }
