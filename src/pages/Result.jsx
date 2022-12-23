@@ -163,10 +163,7 @@ const rollDice = keyframes`
 
 const RandomButton = styled.button`
   font-size: 20px;
-
-  &:hover {
-    animation: ${rollDice} 1s ease-in-out infinite;
-  }
+  animation: ${rollDice} 1s ease-in-out infinite;
 `;
 
 const ButtonContainer = styled.div`
