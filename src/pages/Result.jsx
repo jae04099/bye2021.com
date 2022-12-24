@@ -151,7 +151,7 @@ const rollDice = keyframes`
     transform: rotate(90deg);
   }
   50% {
-    transform: translateY(-100%) rotate(180deg);
+    transform: translateY(-50%) rotate(180deg);
   }
   75% {
     transform: rotate(270deg);
