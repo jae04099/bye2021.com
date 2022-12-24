@@ -3,7 +3,9 @@ import styled from "styled-components";
 import FormName from "./components/Main/FormName";
 import Button from "./components/Common/Button";
 import Container from "./components/Common/Container";
-import { primary700 } from "./constant/color";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faGithub } from '@fortawesome/fontawesome-free-brands';
+import { primary700, primary900 } from "./constant/color";
 
 export default function App() {
   const copyUrl = () => {
@@ -36,25 +38,30 @@ export default function App() {
   } else {
     return (
       <Container>
-        <Header>
-          안녕<span>2022</span>
-        </Header>
-        <Description>
-          <Strong>키워드</Strong>와 <Strong>색</Strong>으로
-          <br />
-          나의 2022 기록하기
-        </Description>
-        <Wrapper>
-          <BookImage src="/image/favorite-book.png" alt="" />
-          <FormName />
-          <Button toLink={"/answer"} children={"2022 정리하기"} />
-        </Wrapper>
-      </Container>
+      <TopTitle>
+        <h1>안녕<span>2022</span></h1>
+        <a href="https://github.com/jae04099/loglog.co.kr" target="_blank" rel="noreferrer noopener"><FontAwesomeIcon icon={faGithub} /></a>
+      </TopTitle>
+      <Description>
+        <Strong>키워드</Strong>와 <Strong>색</Strong>으로
+        <br />
+        나의 2022 기록하기
+      </Description>
+      <Wrapper>
+        <BookImage src="/image/favorite-book.png" alt="" />
+        <FormName />
+        <Button toLink={"/answer"} children={"2022 정리하기"} />
+      </Wrapper>
+    </Container>
     );
   }
 }
 
-const Header = styled.h1`
+const TopTitle = styled.div`
+display: flex;
+justify-content: space-between;
+align-items: center;
+> h1 {
   font-size: 36px;
   font-weight: 600;
   color: ${primary700};
@@ -62,6 +69,12 @@ const Header = styled.h1`
     font-style: normal;
     color: #939393;
   }
+}
+
+> a {
+  font-size: 24px;
+  color: ${primary900};
+}
 `;
 
 const Description = styled.p`
