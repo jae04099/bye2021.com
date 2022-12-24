@@ -1,22 +1,24 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import FormName from "./components/Main/FormName";
-import { primary700 } from "./constant/color";
 import { useRecoilState } from "recoil";
 import { nameState } from "./atom";
 import { useNavigate } from "react-router-dom";
-
-
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faGithub } from '@fortawesome/fontawesome-free-brands';
+import { primary700, primary900 } from "./constant/color";
 
 export default function App() {
   const [name] = useRecoilState(nameState);
   const [customVh, setCustomVh] = useState(0);
   const navigate = useNavigate();
+
   const copyUrl = () => {
     window.navigator.clipboard.writeText("https://loglog.co.kr").then(() => {
       alert("링크가 복사되었습니다! 즐거운 한해 마무리 하세요~");
     });
   };
+
   const checkHasName = () => {
     if (!name) {
       alert('이름을 입력해주세요!');
@@ -61,9 +63,10 @@ export default function App() {
   } else {
     return (
       <Container>
-        <Header>
-          안녕<span>2022</span>
-        </Header>
+        <TopTitle>
+          <h1>안녕<span>2022</span></h1>
+          <a href="https://github.com/jae04099/loglog.co.kr" target="_blank" rel="noreferrer noopener"><FontAwesomeIcon icon={faGithub} /></a>
+        </TopTitle>
         <Description>
           <Strong>키워드</Strong>와 <Strong>색</Strong>으로
           <br />
@@ -87,7 +90,11 @@ const Container = styled.main`
   padding: 50px 20px 0;
 `;
 
-const Header = styled.h1`
+const TopTitle = styled.div`
+display: flex;
+justify-content: space-between;
+align-items: center;
+> h1 {
   font-size: 36px;
   font-weight: 600;
   color: ${primary700};
@@ -95,37 +102,43 @@ const Header = styled.h1`
     font-style: normal;
     color: #939393;
   }
+}
+
+> a {
+  font-size: 24px;
+  color: ${primary900};
+}
 `;
 
 const Description = styled.p`
-  margin-top: 15px;
-  line-height: 20px;
+margin-top: 15px;
+line-height: 20px;
 `;
 
 const Strong = styled.strong`
-  color: #171717;
+color: #171717;
 `;
 
 const Wrapper = styled.div`
-  text-align: center;
+text-align: center;
 `;
 const BookImage = styled.img`
-  width: 50%;
+width: 50%;
 `;
 
 const CopyButton = styled.button`
-  display: inline-block;
-  width: 100%;
-  height: 48px;
-  font-size: 14px;
-  border-radius: 15px;
-  background-color: #454545;
-  color: white;
+display: inline-block;
+width: 100%;
+height: 48px;
+font-size: 14px;
+border-radius: 15px;
+background-color: #454545;
+color: white;
 `;
 
 const Caution = styled.h1`
-  text-align: center;
-  margin-bottom: 30px;
+text-align: center;
+margin-bottom: 30px;
 `;
 
 const ButtonContainer = styled.div`
