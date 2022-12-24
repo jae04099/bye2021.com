@@ -3,14 +3,16 @@ import styled from "styled-components";
 import FormName from "./components/Main/FormName";
 import Button from "./components/Common/Button";
 import Container from "./components/Common/Container";
-import { primary700 } from "./constant/color";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faGithub } from '@fortawesome/fontawesome-free-brands';
+import { primary700, primary900 } from "./constant/color";
 
 export default function App() {
   return (
     <Container>
       <TopTitle>
         <h1>안녕<span>2022</span></h1>
-        <a href="https://github.com/jae04099/loglog.co.kr" target="_blank" rel="noreferrer noopener">🤙</a>
+        <a href="https://github.com/jae04099/loglog.co.kr" target="_blank" rel="noreferrer noopener"><FontAwesomeIcon icon={faGithub} /></a>
       </TopTitle>
       <Description>
         <Strong>키워드</Strong>와 <Strong>색</Strong>으로
@@ -42,6 +44,7 @@ align-items: center;
 
 > a {
   font-size: 24px;
+  color: ${primary900};
 }
 `;
 
