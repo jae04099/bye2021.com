@@ -26,7 +26,6 @@ export default function App() {
   }
 
   const onKeyPress = e => {
-    e.preventDefault();
     if (e.key === 'Enter') {
       checkHasName();
     }
