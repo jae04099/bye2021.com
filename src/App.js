@@ -1,7 +1,6 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import FormName from "./components/Main/FormName";
-import Container from "./components/Common/Container";
 import { primary700 } from "./constant/color";
 import { useRecoilState } from "recoil";
 import { nameState } from "./atom";
@@ -11,6 +10,7 @@ import { useNavigate } from "react-router-dom";
 
 export default function App() {
   const [name] = useRecoilState(nameState);
+  const [customVh, setCustomVh] = useState(0);
   const navigate = useNavigate();
   const copyUrl = () => {
     window.navigator.clipboard.writeText("https://loglog.co.kr").then(() => {
@@ -30,6 +30,11 @@ export default function App() {
       checkHasName();
     }
   }
+
+  useEffect(() => {
+    setCustomVh(window.innerHeight * 0.01);
+    document.documentElement.style.setProperty('--vh', `${customVh}px`);
+  }, []);
 
   if (
     navigator.userAgent.match(
@@ -75,6 +80,12 @@ export default function App() {
     );
   }
 }
+
+const Container = styled.main`
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 50px 20px 0;
+`;
 
 const Header = styled.h1`
   font-size: 36px;
