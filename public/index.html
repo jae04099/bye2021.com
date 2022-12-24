@@ -45,19 +45,6 @@
 <body>
   <noscript>You need to enable JavaScript to run this app.</noscript>
   <div id="root"></div>
-
-  <script type='text/javascript'>
-    window.onload = function () {
-      if (navigator.userAgent.match(/inapp|NAVER|KAKAOTALK|Snapchat|Line|WirtschaftsWoche|Thunderbird|Instagram|everytimeApp|WhatsApp|Electron|wadiz|AliApp|zumapp|iPhone(.*)Whale|Android(.*)Whale|kakaostory|band|twitter|DaumApps|DaumDevice\/mobile|FB_IAB|FB4A|FBAN|FBIOS|FBSS|SamsungBrowser\/[^1]/i)) {
-        document.body.innerHTML = '';
-        if (navigator.userAgent.match(/iPhone|iPad/i)) {
-          alert('더 나은 환경을 위해 사파리를 이용해주세요!');
-        } else {
-          location.href = 'intent://' + location.href.replace(/https?:\/\//i, '') + '#Intent;scheme=http;package=com.android.chrome;end';
-        }
-      }
-    }
-  </script>
 </body>
 
 </html>
