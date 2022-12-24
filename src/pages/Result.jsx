@@ -4,7 +4,7 @@ import tinycolor from "tinycolor2";
 import html2canvas from "html2canvas";
 import { MasonryGrid } from "../components/Result/MasonryGrid";
 import { useRecoilState } from "recoil";
-import { finDataListState, nameState } from "../atom";
+import { finDataListState, nameState, isInappIosState } from "../atom";
 import { useNavigate } from "react-router-dom";
 
 const Result = () => {
@@ -12,10 +12,18 @@ const Result = () => {
   const [pointColor, setPointColor] = useState(null);
   const [finDataList, setFinDataList] = useRecoilState(finDataListState);
   const [name, setName] = useRecoilState(nameState);
+  const [isInappIos, setInappIos] = useRecoilState(isInappIosState);
+  const InAppList =
+    "/inapp|NAVER|KAKAOTALK|Snapchat|Line|WirtschaftsWoche|Thunderbird|Instagram|everytimeApp|WhatsApp|Electron|wadiz|AliApp|zumapp|iPhone(.*)Whale|Android(.*)Whale|kakaostory|band|twitter|DaumApps|DaumDevice/mobile|FB_IAB|FB4A|FBAN|FBIOS|FBSS|SamsungBrowser/[^1]/i,";
 
   useEffect(() => {
     // if (finDataList.length === 0) navigate("/");
-
+    if (
+      navigator.userAgent.match(InAppList) &&
+      navigator.userAgent.match(/iPhone|iPad/i)
+    ) {
+      setInappIos(true);
+    }
     window.scrollTo(0, 0);
 
     const myImgs = document.querySelectorAll(".my-images");
@@ -83,8 +91,8 @@ const Result = () => {
         <MasonryGrid datas={finDataList} pointColor={pointColor} />
       </CaptureContainer>
       <ButtonContainer>
-        <ResultButton type="button" onClick={captureResult}>
-          이미지로 저장하기
+        <ResultButton type="button" onClick={isInappIos ? "" : captureResult}>
+          {isInappIos ? "캡쳐 후 공유해보세요!" : "이미지로 저장하기"}
         </ResultButton>
         <ResultButton type="button" onClick={returnMain}>
           다시 기록하기
@@ -112,6 +120,7 @@ const CaptureContainer = styled.div`
 const Title = styled.h1`
   color: white;
   font-size: 24px;
+  line-height: 32px;
 `;
 
 const Name = styled.span`
