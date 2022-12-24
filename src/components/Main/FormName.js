@@ -3,11 +3,12 @@ import { useRecoilState } from "recoil";
 import styled from "styled-components";
 import { nameState } from "../../atom";
 
-export default function FormName() {
+export default function FormName({onKeyPress}) {
   const [name, setName] = useRecoilState(nameState);
+ 
   return (
     <>
-      <NameForm onClick={(e) => e.preventDefault(e)}>
+      <NameForm onClick={(e) => e.preventDefault(e)} onKeyPress={e => onKeyPress(e)}>
         <label>이름을 입력해주세요</label>
         <input
           value={name}

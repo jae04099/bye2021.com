@@ -1,16 +1,37 @@
-import React, { useEffect } from "react";
+import React from "react";
 import styled from "styled-components";
 import FormName from "./components/Main/FormName";
-import Button from "./components/Common/Button";
 import Container from "./components/Common/Container";
 import { primary700 } from "./constant/color";
+import { useRecoilState } from "recoil";
+import { nameState } from "./atom";
+import { useNavigate } from "react-router-dom";
+
+
 
 export default function App() {
+  const [name] = useRecoilState(nameState);
+  const navigate = useNavigate();
   const copyUrl = () => {
     window.navigator.clipboard.writeText("https://loglog.co.kr").then(() => {
       alert("링크가 복사되었습니다! 즐거운 한해 마무리 하세요~");
     });
   };
+  const checkHasName = () => {
+    if (!name) {
+      alert('이름을 입력해주세요!');
+    } else {
+      navigate("/answer");
+    }
+  }
+
+  const onKeyPress = e => {
+    e.preventDefault();
+    if (e.key === 'Enter') {
+      checkHasName();
+    }
+  }
+
   if (
     navigator.userAgent.match(
       /inapp|NAVER|KAKAOTALK|Snapchat|Line|WirtschaftsWoche|Thunderbird|Instagram|everytimeApp|WhatsApp|Electron|wadiz|AliApp|zumapp|iPhone(.*)Whale|Android(.*)Whale|kakaostory|band|twitter|DaumApps|DaumDevice\/mobile|FB_IAB|FB4A|FBAN|FBIOS|FBSS|SamsungBrowser\/[^1]/i,
@@ -45,9 +66,11 @@ export default function App() {
           나의 2022 기록하기
         </Description>
         <Wrapper>
-          <BookImage src="/image/favorite-book.png" alt="" />
-          <FormName />
-          <Button toLink={"/answer"} children={"2022 정리하기"} />
+          <BookImage src="/image/favorite-book.png" alt="book icon" />
+          <FormName onKeyPress={onKeyPress} />
+          <ButtonContainer>
+            <NextBtn onClick={checkHasName}>2022 정리하기</NextBtn>
+          </ButtonContainer>
         </Wrapper>
       </Container>
     );
@@ -94,3 +117,21 @@ const Caution = styled.h1`
   text-align: center;
   margin-bottom: 30px;
 `;
+
+const ButtonContainer = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 48px;
+`
+
+const NextBtn = styled.button`
+  width: 100%;
+  height: 48px;
+  font-size: 14px;
+  color: white;
+  background: #4f4f4f;
+  border-radius: 15px;
+  text-align: center;
+  line-height: 48px;
+`
