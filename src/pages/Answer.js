@@ -94,8 +94,6 @@ const Container = styled.section`
   position: relative;
   max-width: 500px;
   width: calc(100% - 40px);
-  height: 100%;
-  min-height: calc(100vh - 88px);
   margin: 0 auto;
   padding: 50px 20px 30px;
   background: #e9e9e9;

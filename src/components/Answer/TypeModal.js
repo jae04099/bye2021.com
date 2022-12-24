@@ -2,6 +2,7 @@ import React from "react";
 import { useState } from "react";
 import { useRecoilState } from "recoil";
 import { clickedKeywordState, isShowState, finDataListState } from "../../atom";
+import { primary600, primary800 } from "../../constant/color";
 import styled, { css } from "styled-components";
 
 export default function TypeModal() {
@@ -30,7 +31,6 @@ export default function TypeModal() {
   };
   return (
     <Container>
-      {/* <Dimmed /> */}
       <ModalWrap>
         <button onClick={() => setShow(false)}>닫기</button>
         <ModalInnerWrap>
@@ -98,24 +98,28 @@ const ModalWrap = styled.div`
   > button {
     float: right;
     background: transparent;
+    color: ${primary800};
+    font-size: 12px;
+;
   }
 `;
 const ModalInnerWrap = styled.div`
   text-align: center;
   > button {
-    max-width: 160px;
+    max-width: 180px;
     width: 100%;
-    background: #4f4f4f;
+    background: ${primary600};
     border-radius: 15px;
     color: #fff;
-    padding: 10px 0;
+    padding: 15px 0;
+    font-size: 14px;
   }
 `;
 
 const Title = styled.h2`
   font-size: 20px;
   font-weight: 600;
-  margin: 48px 30px 30px;
+  margin: 40px 30px 30px;
 `;
 
 const ContWrap = styled.ul`
