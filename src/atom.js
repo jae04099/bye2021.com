@@ -30,4 +30,11 @@ const isSaveState = atom({
     default: false
 })
 
-export {nameState, finDataListState, clickedKeywordState, isShowState, isSaveState};
+/** check is user from ios inapp */
+const isInappIosState = atom({
+    key: 'isInappIosState',
+    default: false
+})
+
+
+export {nameState, finDataListState, clickedKeywordState, isShowState, isSaveState, isInappIosState};

@@ -7,17 +7,12 @@ import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGithub } from '@fortawesome/fontawesome-free-brands';
 import { primary700, primary900 } from "./constant/color";
+import { INAPP_LIST } from "./constant/inappList";
 
 export default function App() {
   const [name] = useRecoilState(nameState);
   const [customVh, setCustomVh] = useState(0);
   const navigate = useNavigate();
-
-  const copyUrl = () => {
-    window.navigator.clipboard.writeText("https://loglog.co.kr").then(() => {
-      alert("링크가 복사되었습니다! 즐거운 한해 마무리 하세요~");
-    });
-  };
 
   const checkHasName = () => {
     if (!name) {
@@ -33,33 +28,31 @@ export default function App() {
     }
   }
 
-  useEffect(() => {
-    setCustomVh(window.innerHeight * 0.01);
-    document.documentElement.style.setProperty('--vh', `${customVh}px`);
-  }, []);
-
-  if (
-    navigator.userAgent.match(
-      /inapp|NAVER|KAKAOTALK|Snapchat|Line|WirtschaftsWoche|Thunderbird|Instagram|everytimeApp|WhatsApp|Electron|wadiz|AliApp|zumapp|iPhone(.*)Whale|Android(.*)Whale|kakaostory|band|twitter|DaumApps|DaumDevice\/mobile|FB_IAB|FB4A|FBAN|FBIOS|FBSS|SamsungBrowser\/[^1]/i,
-    )
-  ) {
-    if (navigator.userAgent.match(/iPhone|iPad/i)) {
-      return (
-        <Container>
-          <Caution>
-            더 나은 환경을 위해 외부 브라우저로 이동해 이용해주세요! 🥲
-          </Caution>
-          <CopyButton type="button" onClick={copyUrl}>
-            링크 복사하기
-          </CopyButton>
-        </Container>
-      );
-    } else {
+  const handleIsAosInappBrowser = () => {
+    if (navigator.userAgent.match(INAPP_LIST) && !navigator.userAgent.match(/iPhone|iPad/i)) {
       window.location.href =
         "intent://" +
         window.location.href.replace(/https?:\/\//i, "") +
         "#Intent;scheme=http;package=com.android.chrome;end";
     }
+  }
+
+  useEffect(() => {
+    setCustomVh(window.innerHeight * 0.01);
+    document.documentElement.style.setProperty('--vh', `${customVh}px`);
+    setTimeout(() => { handleIsAosInappBrowser(); }, 3000);
+  }, []);
+
+  if (
+    navigator.userAgent.match(INAPP_LIST) && !navigator.userAgent.match(/iPhone|iPad/i)
+  ) {
+    return (
+      <Container>
+        <Caution>
+          더 나은 환경을 위해 외부 브라우저로 이동 중 입니다! 🚀
+        </Caution>
+      </Container>
+    );
   } else {
     return (
       <Container>
