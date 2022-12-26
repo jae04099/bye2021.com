@@ -5,6 +5,7 @@ import html2canvas from "html2canvas";
 import { MasonryGrid } from "../components/Result/MasonryGrid";
 import { useRecoilState } from "recoil";
 import { finDataListState, nameState, isInappIosState } from "../atom";
+import { INAPP_LIST } from "../constant/inappList";
 import { useNavigate } from "react-router-dom";
 
 const Result = () => {
@@ -13,15 +14,13 @@ const Result = () => {
   const [finDataList, setFinDataList] = useRecoilState(finDataListState);
   const [name, setName] = useRecoilState(nameState);
   const [isInappIos, setInappIos] = useRecoilState(isInappIosState);
-  const InAppList =
-    "/inapp|NAVER|KAKAOTALK|Snapchat|Line|WirtschaftsWoche|Thunderbird|Instagram|everytimeApp|WhatsApp|Electron|wadiz|AliApp|zumapp|iPhone(.*)Whale|Android(.*)Whale|kakaostory|band|twitter|DaumApps|DaumDevice/mobile|FB_IAB|FB4A|FBAN|FBIOS|FBSS|SamsungBrowser/[^1]/i,";
 
   useEffect(() => {
-    if(name === ''){
+    if (name === "") {
       return navigate("/");
     }
     if (
-      navigator.userAgent.match(InAppList) &&
+      navigator.userAgent.match(INAPP_LIST) &&
       navigator.userAgent.match(/iPhone|iPad/i)
     ) {
       setInappIos(true);
@@ -93,9 +92,16 @@ const Result = () => {
         <MasonryGrid datas={finDataList} pointColor={pointColor} />
       </CaptureContainer>
       <ButtonContainer>
-        <ResultButton type="button" onClick={isInappIos ? "" : captureResult}>
-          {isInappIos ? "캡쳐 후 공유해보세요!" : "이미지로 저장하기"}
-        </ResultButton>
+        {isInappIos ? (
+          <ResultButton type="button" disabled>
+            {" "}
+            캡쳐 후 공유해보세요!{" "}
+          </ResultButton>
+        ) : (
+          <ResultButton type="button" onClick={captureResult}>
+            이미지로 저장하기
+          </ResultButton>
+        )}
         <ResultButton type="button" onClick={returnMain}>
           다시 기록하기
         </ResultButton>

@@ -7,12 +7,12 @@ import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGithub } from '@fortawesome/fontawesome-free-brands';
 import { primary700, primary900 } from "./constant/color";
+import { INAPP_LIST } from "./constant/inappList";
 
 export default function App() {
   const [name] = useRecoilState(nameState);
   const [customVh, setCustomVh] = useState(0);
   const navigate = useNavigate();
-  const InAppList = '/inapp|NAVER|KAKAOTALK|Snapchat|Line|WirtschaftsWoche|Thunderbird|Instagram|everytimeApp|WhatsApp|Electron|wadiz|AliApp|zumapp|iPhone(.*)Whale|Android(.*)Whale|kakaostory|band|twitter|DaumApps|DaumDevice\/mobile|FB_IAB|FB4A|FBAN|FBIOS|FBSS|SamsungBrowser\/[^1]/i,';
 
   const checkHasName = () => {
     if (!name) {
@@ -29,7 +29,7 @@ export default function App() {
   }
 
   const handleIsAosInappBrowser = () => {
-    if (navigator.userAgent.match(InAppList) && !navigator.userAgent.match(/iPhone|iPad/i)) {
+    if (navigator.userAgent.match(INAPP_LIST) && !navigator.userAgent.match(/iPhone|iPad/i)) {
       window.location.href =
         "intent://" +
         window.location.href.replace(/https?:\/\//i, "") +
@@ -40,11 +40,11 @@ export default function App() {
   useEffect(() => {
     setCustomVh(window.innerHeight * 0.01);
     document.documentElement.style.setProperty('--vh', `${customVh}px`);
-    setTimeout(() => {}, 3000);handleIsAosInappBrowser();
+    setTimeout(() => { handleIsAosInappBrowser(); }, 3000);
   }, []);
 
   if (
-    navigator.userAgent.match(InAppList) && !navigator.userAgent.match(/iPhone|iPad/i)
+    navigator.userAgent.match(INAPP_LIST) && !navigator.userAgent.match(/iPhone|iPad/i)
   ) {
     return (
       <Container>
